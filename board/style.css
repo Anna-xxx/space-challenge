@@ -75,3 +75,4 @@ details { margin: 14px 0; }
   .board { padding: 0 16px 16px; grid-auto-columns: 82vw; }
   .grid { grid-template-columns: 1fr; }
 }
+.error { color: #ffb4a8; background: #3a1d1d; border-radius: 8px; padding: 8px 10px; font-size: 14px; }

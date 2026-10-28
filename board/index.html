@@ -21,6 +21,7 @@
   <form method="dialog" id="loginForm">
     <div class="dlg-head"><h2>Подключить GitHub</h2><button type="button" data-close>Закрыть</button></div>
     <p>Нужен fine-grained токен с доступом к репозиторию <b>space-challenge</b>: Issues и Contents — Read and write.</p>
+    <p id="loginError" class="error" hidden></p>
     <label>Токен<input id="tokenInput" type="password" required autocomplete="off"></label>
     <button class="primary">Войти</button>
   </form>
