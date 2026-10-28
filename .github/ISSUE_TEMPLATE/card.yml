@@ -1,0 +1,41 @@
+name: Карточка
+description: Задача для команды агентов
+labels: []
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: Что нужно сделать
+      description: Только то, что просили; лишнее — отдельной карточкой
+    validations:
+      required: true
+  - type: dropdown
+    id: role
+    attributes:
+      label: Роль
+      options: [БА, дизайнер, разработка, тестировщик, безопасность, данные, юрист, парсер]
+  - type: input
+    id: who
+    attributes:
+      label: Кто делает
+      description: Пусто — доска выберет сама
+  - type: input
+    id: model
+    attributes:
+      label: Модель
+      description: Пусто — агент ничего не меняет
+  - type: dropdown
+    id: effort
+    attributes:
+      label: Мощность
+      description: Пусто — агент ничего не меняет
+      options: [low, medium, high, xhigh, max]
+  - type: input
+    id: deadline
+    attributes:
+      label: Срок
+      description: Если срочно, например «до 2 ноября»
+  - type: textarea
+    id: done
+    attributes:
+      label: Критерии готовности
