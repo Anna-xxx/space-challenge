@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   tts:
-    if: contains(github.event.issue.labels.*.name, 'elevenlabs') && (github.event.action == 'opened' || github.event.label.name == 'elevenlabs')
+    if: github.actor == github.repository_owner && contains(github.event.issue.labels.*.name, 'elevenlabs') && (github.event.action == 'opened' || github.event.label.name == 'elevenlabs')
     runs-on: ubuntu-latest
     env:
       ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
