@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Доска хаба</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <h1>Доска хаба</h1>
+  <span id="conn" class="conn">Не подключено</span>
+  <button id="addBtn" class="primary">+ Карточка</button>
+</header>
+
+<main id="board" class="board"></main>
+
+<!-- Вход: токен GitHub хранится только в этом браузере -->
+<dialog id="login">
+  <form method="dialog" id="loginForm">
+    <h2>Подключить GitHub</h2>
+    <p>Нужен fine-grained токен с доступом к репозиторию <b>space-challenge</b>: Issues и Contents — Read and write.</p>
+    <label>Токен<input id="tokenInput" type="password" required autocomplete="off"></label>
+    <button class="primary">Войти</button>
+  </form>
+</dialog>
+
+<!-- Новая карточка -->
+<dialog id="newCard" class="wide">
+  <form id="newForm">
+    <div class="dlg-head"><h2>Новая задача</h2><button type="button" data-close>Закрыть</button></div>
+    <div class="grid">
+      <div>
+        <label>Что сделать<input name="title" required></label>
+        <label>Описание<textarea name="body" rows="5" placeholder="Детали, ссылки, критерии готовности. Картинку можно вставить сюда (Ctrl+V)"></textarea></label>
+        <p class="hint">Карточка попадёт в «Бэклог». Claude ответит в комментариях: как понял задачу, кому отдаёт и какой ИИ нужен. Работа начнётся после вашего «да».</p>
+      </div>
+      <aside class="side">
+        <div class="field-title">Кто делает</div>
+        <div id="whoBoxes" class="chips"></div>
+        <p class="hint">Пусто: выберет Claude</p>
+        <div class="field-title">Отметки</div>
+        <label class="chip"><input type="checkbox" name="blocker"> Блокер запуска</label>
+        <label>Статус коротко<input name="status" placeholder="Что сейчас происходит"></label>
+        <label>Модель ИИ<select name="model"></select></label>
+        <label>Мощность<select name="effort"></select></label>
+        <p class="hint">Агент работает этой моделью и мощностью. Пусто: выберет Claude</p>
+        <button class="primary">Сохранить</button>
+      </aside>
+    </div>
+  </form>
+</dialog>
+
+<!-- Открытая карточка с комментариями -->
+<dialog id="cardView" class="wide">
+  <div class="dlg-head"><h2 id="cvTitle"></h2><button type="button" data-close>Закрыть</button></div>
+  <form id="commentForm" class="comment-box">
+    <textarea name="text" rows="2" placeholder="Комментарий для агентов. Enter — отправить, Shift+Enter — новая строка. Картинку можно вставить Ctrl+V"></textarea>
+  </form>
+  <div id="cvComments" class="comments"></div>
+  <details><summary>Описание</summary><div id="cvBody" class="md"></div></details>
+  <a id="cvLink" target="_blank" rel="noopener">Открыть на GitHub</a>
+</dialog>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+name: Claude на доске
+
+# Claude отвечает на новые карточки и на каждый комментарий владельца репозитория.
+on:
+  issues:
+    types: [opened]
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  id-token: write
+
+jobs:
+  claude:
+    if: github.actor == github.repository_owner
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Модель из меток карточки
+        id: model
+        env:
+          LABELS: ${{ toJSON(github.event.issue.labels.*.name) }}
+        run: |
+          m=$(echo "$LABELS" | grep -o '"модель:[a-z]*"' | head -1 | sed 's/"модель:\(.*\)"/\1/')
+          args=""
+          [ -n "$m" ] && args="--model $m"
+          echo "args=$args" >> "$GITHUB_OUTPUT"
+
+      - uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_args: ${{ steps.model.outputs.args }}
+          prompt: |
+            Ты работаешь на доске задач. Карточка — задача #${{ github.event.issue.number }} в ${{ github.repository }}.
+            Правила доски — в файле BOARD.md (если его нет в main, следуй этим правилам):
+            - Колонки — метки «колонка:…». Новая карточка в «Бэклог». Работа начинается только после «да» Анны.
+            - На комментарий Анны сразу ответь строкой «Вижу …, делаю: …», потом результатом и «Нормально?».
+            - На новую карточку ответь: как понял задачу, кому отдаёшь (метки «кто:…») и какие модель и мощность нужны.
+            - Вопросы короткие, варианты отдельными строками с «•», рекомендуемый с «★».
+            - Делай только то, что в карточке; лишнее предложи отдельной карточкой.
+            - Карточки с меткой «вопрос Анны» сам в «Готово» не двигай: ставь «колонка:Ждёт Анну» и спроси «Закрываем?».
+            - Код — только через PR; в main не вливай без «вливай» или «да» Анны в этой карточке.
+            - Задачи озвучки отдавай ElevenLabs: поставь метку «elevenlabs».
+            Пиши по-русски.
