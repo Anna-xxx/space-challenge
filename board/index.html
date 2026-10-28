@@ -10,6 +10,7 @@
 <header class="top">
   <h1>Доска хаба</h1>
   <span id="conn" class="conn">Не подключено</span>
+  <button id="loginBtn" type="button">Войти</button>
   <button id="addBtn" class="primary">+ Карточка</button>
 </header>
 
@@ -18,7 +19,7 @@
 <!-- Вход: токен GitHub хранится только в этом браузере -->
 <dialog id="login">
   <form method="dialog" id="loginForm">
-    <h2>Подключить GitHub</h2>
+    <div class="dlg-head"><h2>Подключить GitHub</h2><button type="button" data-close>Закрыть</button></div>
     <p>Нужен fine-grained токен с доступом к репозиторию <b>space-challenge</b>: Issues и Contents — Read and write.</p>
     <label>Токен<input id="tokenInput" type="password" required autocomplete="off"></label>
     <button class="primary">Войти</button>
