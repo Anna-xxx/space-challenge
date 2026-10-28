@@ -40,7 +40,8 @@ function logout() {
   try { localStorage.removeItem("gh-token"); } catch {}
   $("#conn").textContent = "Не подключено";
   $("#conn").classList.remove("ok");
-  $("#login").showModal();
+  $("#loginBtn").hidden = false;
+  if (!$("#login").open) $("#login").showModal();
 }
 
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -121,6 +122,7 @@ async function load() {
   issues = list;
   $("#conn").textContent = "Claude на связи";
   $("#conn").classList.add("ok");
+  $("#loginBtn").hidden = true;
   render();
 }
 
@@ -268,7 +270,7 @@ $("#commentForm textarea").addEventListener("keydown", (e) => {
 $("#loginForm").addEventListener("submit", () => {
   token = $("#tokenInput").value.trim();
   try { localStorage.setItem("gh-token", token); } catch {}
-  load().catch((err) => alert(err.message));
+  load().catch(() => {});
 });
 
 $("#addBtn").addEventListener("click", () => $("#newCard").showModal());
@@ -277,5 +279,7 @@ enablePaste($("#newForm [name=body]"));
 enablePaste($("#commentForm textarea"));
 
 fillForm();
-if (token) load().catch(() => {}); else $("#login").showModal();
+$("#loginBtn").addEventListener("click", () => $("#login").showModal());
+// Если токен не подошёл или сеть недоступна, окно входа откроется снова.
+if (token) load().catch(() => logout()); else $("#login").showModal();
 setInterval(() => { if (token && !document.querySelector("dialog[open]")) load().catch(() => {}); }, 60000);
