@@ -1,0 +1,21 @@
+name: Задача для Claude
+description: Задача, которую выполняет Claude (код, тексты, анализ)
+title: "[Claude] "
+labels: ["claude"]
+body:
+  - type: textarea
+    id: goal
+    attributes:
+      label: Что нужно сделать
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Критерии готовности
+      description: Как тестировщик поймёт, что задача выполнена
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Приоритет
+      options: [high, medium, low]

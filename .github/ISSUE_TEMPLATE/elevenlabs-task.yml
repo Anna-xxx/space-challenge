@@ -1,0 +1,25 @@
+name: Задача для ElevenLabs
+description: Озвучка, голос, аудио через ElevenLabs
+title: "[ElevenLabs] "
+labels: ["elevenlabs"]
+body:
+  - type: textarea
+    id: text
+    attributes:
+      label: Текст для озвучки / что нужно сделать
+    validations:
+      required: true
+  - type: input
+    id: voice
+    attributes:
+      label: Голос
+      description: Имя или ID голоса в ElevenLabs
+  - type: textarea
+    id: done
+    attributes:
+      label: Критерии готовности
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Приоритет
+      options: [high, medium, low]
