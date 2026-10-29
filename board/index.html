@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Доска хаба</title>
-<link rel="stylesheet" href="style.css?v=3">
+<link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
 <header class="top">
@@ -44,9 +44,21 @@
         <div class="field-title">Отметки</div>
         <label class="chip"><input type="checkbox" name="blocker"> Блокер запуска</label>
         <label>Статус коротко<input name="status" placeholder="Что сейчас происходит"></label>
-        <label>Модель ИИ<select name="model"></select></label>
-        <label>Мощность<select name="effort"></select></label>
-        <p class="hint">Агент работает этой моделью и мощностью. Пусто: выберет Claude</p>
+        <div class="field-title">ИИ</div>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="ai" value="claude" checked> Claude</label>
+          <label class="chip"><input type="radio" name="ai" value="elevenlabs"> ElevenLabs</label>
+        </div>
+        <div id="claudeFields">
+          <label>Модель ИИ<select name="model"></select></label>
+          <label>Мощность<select name="effort"></select></label>
+          <p class="hint">Агент работает этой моделью и мощностью. Пусто: выберет Claude</p>
+        </div>
+        <div id="elevenFields" hidden>
+          <label>Голос<select name="voice"></select></label>
+          <label id="voiceIdField" hidden>ID голоса<input name="voiceId" placeholder="Из библиотеки голосов ElevenLabs"></label>
+          <p class="hint">В «Описание» пишите только текст для озвучки. Готовый mp3 придёт ссылкой в комментариях.</p>
+        </div>
         <button class="primary">Сохранить</button>
       </aside>
     </div>
@@ -64,6 +76,6 @@
   <a id="cvLink" target="_blank" rel="noopener">Открыть на GitHub</a>
 </dialog>
 
-<script src="app.js?v=3"></script>
+<script src="app.js?v=4"></script>
 </body>
 </html>
