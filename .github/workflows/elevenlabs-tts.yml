@@ -3,14 +3,23 @@ name: ElevenLabs TTS
 # Озвучивает текст задачи с меткой "elevenlabs" и прикладывает mp3 к запуску.
 on:
   issues:
-    types: [opened, labeled]
+    types: [labeled]
+  # «еще раз» / «повтори» в комментарии карточки запускает озвучку заново
+  issue_comment:
+    types: [created]
 
 permissions:
   issues: write
 
 jobs:
   tts:
-    if: github.actor == github.repository_owner && contains(github.event.issue.labels.*.name, 'elevenlabs') && (github.event.action == 'opened' || github.event.label.name == 'elevenlabs')
+    # Новая карточка с меткой приходит и как opened, и как labeled — слушаем только labeled, чтобы не было двух запусков
+    if: >-
+      github.actor == github.repository_owner &&
+      contains(github.event.issue.labels.*.name, 'elevenlabs') &&
+      (github.event.label.name == 'elevenlabs' ||
+       (github.event_name == 'issue_comment' && !github.event.issue.pull_request &&
+        (contains(github.event.comment.body, 'еще раз') || contains(github.event.comment.body, 'ещё раз') || contains(github.event.comment.body, 'повтори'))))
     runs-on: ubuntu-latest
     env:
       ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
@@ -40,13 +49,22 @@ jobs:
         env:
           VOICE: ${{ steps.parse.outputs.voice }}
         run: |
+          if [ -z "$ELEVENLABS_API_KEY" ]; then
+            echo "Секрет ELEVENLABS_API_KEY не задан в настройках репозитория." > error.txt
+            exit 1
+          fi
           code=$(curl -sS -o speech.mp3 -w '%{http_code}' \
             -X POST "https://api.elevenlabs.io/v1/text-to-speech/$VOICE" \
             -H "xi-api-key: $ELEVENLABS_API_KEY" \
             -H "Content-Type: application/json" \
             -H "Accept: audio/mpeg" \
             --data @payload.json)
-          if [ "$code" != "200" ]; then cat speech.mp3; echo; echo "ElevenLabs вернул $code"; exit 1; fi
+          if [ "$code" != "200" ]; then
+            # Ответ ElevenLabs с причиной ошибки (ключ в нём не возвращается)
+            { echo "ElevenLabs ответил $code:"; head -c 600 speech.mp3; } > error.txt
+            cat error.txt
+            exit 1
+          fi
 
       - uses: actions/upload-artifact@v4
         with:
@@ -66,6 +84,7 @@ jobs:
             msg="Озвучка готова: mp3 в разделе Artifacts запуска $url"
             gh issue edit "$N" -R "$REPO" --add-label needs-review
           else
-            msg="Не удалось получить озвучку, подробности в запуске $url"
+            msg="Не удалось получить озвучку. $(cat error.txt 2>/dev/null)
+          Подробности: $url"
           fi
           gh issue comment "$N" -R "$REPO" --body "$msg"
