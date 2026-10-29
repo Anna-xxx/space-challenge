@@ -27,10 +27,14 @@ jobs:
         run: |
           m=$(echo "$LABELS" | grep -o '"модель:[a-z]*"' | head -1 | sed 's/"модель:\(.*\)"/\1/')
           args=""
-          [ -n "$m" ] && args="--model $m"
+          [ -n "$m" ] && args="--model $m "
+          # Без разрешённых команд Claude молча завершает работу и ничего не пишет в карточку
+          args="$args--allowedTools Read,Edit,Write,Glob,Grep,Bash(gh issue:*),Bash(gh pr:*),Bash(git:*)"
           echo "args=$args" >> "$GITHUB_OUTPUT"
 
       - uses: anthropics/claude-code-action@v1
+        env:
+          GH_TOKEN: ${{ github.token }}
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           claude_args: ${{ steps.model.outputs.args }}
@@ -45,4 +49,6 @@ jobs:
             - Карточки с меткой «вопрос Анны» сам в «Готово» не двигай: ставь «колонка:Ждёт Анну» и спроси «Закрываем?».
             - Код — только через PR; в main не вливай без «вливай» или «да» Анны в этой карточке.
             - Задачи озвучки отдавай ElevenLabs: поставь метку «elevenlabs».
+            Отвечай в карточке только комментарием: `gh issue comment ${{ github.event.issue.number }} --body "…"`.
+            Метки меняй через `gh issue edit ${{ github.event.issue.number }} --add-label … --remove-label …`.
             Пиши по-русски.
