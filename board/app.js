@@ -30,17 +30,20 @@ async function gh(path, opts = {}) {
       ...(opts.body ? { "Content-Type": "application/json" } : {}),
     },
   });
-  if (res.status === 401) { logout(); throw new Error("Токен не подходит"); }
-  if (!res.ok) throw new Error(`GitHub ответил ${res.status}`);
+  if (res.status === 401) throw new Error("Токен не подходит: возможно, он скопирован не целиком или истёк.");
+  if (res.status === 403 || res.status === 404) throw new Error("У токена нет доступа к space-challenge. Проверьте, что выбран этот репозиторий и права Issues и Contents: Read and write.");
+  if (!res.ok) throw new Error(`GitHub ответил ошибкой ${res.status}. Попробуйте ещё раз.`);
   return res.status === 204 ? null : res.json();
 }
 
-function logout() {
+function logout(reason) {
   token = "";
   try { localStorage.removeItem("gh-token"); } catch {}
   $("#conn").textContent = "Не подключено";
   $("#conn").classList.remove("ok");
   $("#loginBtn").hidden = false;
+  $("#loginError").textContent = reason || "";
+  $("#loginError").hidden = !reason;
   if (!$("#login").open) $("#login").showModal();
 }
 
@@ -123,6 +126,7 @@ async function load() {
   $("#conn").textContent = "Claude на связи";
   $("#conn").classList.add("ok");
   $("#loginBtn").hidden = true;
+  $("#loginError").hidden = true;
   render();
 }
 
@@ -270,7 +274,7 @@ $("#commentForm textarea").addEventListener("keydown", (e) => {
 $("#loginForm").addEventListener("submit", () => {
   token = $("#tokenInput").value.trim();
   try { localStorage.setItem("gh-token", token); } catch {}
-  load().catch(() => {});
+  load().catch((err) => logout(err.message));
 });
 
 $("#addBtn").addEventListener("click", () => $("#newCard").showModal());
@@ -281,5 +285,5 @@ enablePaste($("#commentForm textarea"));
 fillForm();
 $("#loginBtn").addEventListener("click", () => $("#login").showModal());
 // Если токен не подошёл или сеть недоступна, окно входа откроется снова.
-if (token) load().catch(() => logout()); else $("#login").showModal();
+if (token) load().catch((err) => logout(err.message)); else $("#login").showModal();
 setInterval(() => { if (token && !document.querySelector("dialog[open]")) load().catch(() => {}); }, 60000);

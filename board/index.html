@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Доска хаба</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
 <header class="top">
@@ -21,6 +21,7 @@
   <form method="dialog" id="loginForm">
     <div class="dlg-head"><h2>Подключить GitHub</h2><button type="button" data-close>Закрыть</button></div>
     <p>Нужен fine-grained токен с доступом к репозиторию <b>space-challenge</b>: Issues и Contents — Read and write.</p>
+    <p id="loginError" class="error" hidden></p>
     <label>Токен<input id="tokenInput" type="password" required autocomplete="off"></label>
     <button class="primary">Войти</button>
   </form>
@@ -63,6 +64,6 @@
   <a id="cvLink" target="_blank" rel="noopener">Открыть на GitHub</a>
 </dialog>
 
-<script src="app.js"></script>
+<script src="app.js?v=3"></script>
 </body>
 </html>
