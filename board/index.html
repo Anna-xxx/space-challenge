@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Доска хаба</title>
-<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 <header class="top">
@@ -30,12 +30,12 @@
 <!-- Новая карточка -->
 <dialog id="newCard" class="wide">
   <form id="newForm">
-    <div class="dlg-head"><h2>Новая задача</h2><button type="button" data-close>Закрыть</button></div>
+    <div class="dlg-head"><h2 id="formTitle">Новая задача</h2><button type="button" data-close>Закрыть</button></div>
     <div class="grid">
       <div>
         <label>Что сделать<input name="title" required></label>
         <label>Описание<textarea name="body" rows="5" placeholder="Детали, ссылки, критерии готовности. Картинку можно вставить сюда (Ctrl+V)"></textarea></label>
-        <p class="hint">Карточка попадёт в «Бэклог». Claude ответит в комментариях: как понял задачу, кому отдаёт и какой ИИ нужен. Работа начнётся после вашего «да».</p>
+        <p class="hint" id="createHint">Карточка попадёт в «Бэклог». Claude ответит в комментариях: как понял задачу, кому отдаёт и какой ИИ нужен. Работа начнётся после вашего «да».</p>
       </div>
       <aside class="side">
         <div class="field-title">Кто делает</div>
@@ -63,19 +63,18 @@
       </aside>
     </div>
   </form>
+  <!-- Только при открытии существующей карточки: переписка сверху вниз, поле ответа внизу -->
+  <section id="editExtra" hidden>
+    <h3>Комментарии</h3>
+    <div id="cvComments" class="comments"></div>
+    <form id="commentForm" class="comment-box">
+      <textarea name="text" rows="2" placeholder="Комментарий для агентов. Enter — отправить, Shift+Enter — новая строка. Картинку можно вставить Ctrl+V"></textarea>
+    </form>
+    <a id="cvLink" target="_blank" rel="noopener">Открыть на GitHub</a>
+  </section>
 </dialog>
 
-<!-- Открытая карточка с комментариями -->
-<dialog id="cardView" class="wide">
-  <div class="dlg-head"><h2 id="cvTitle"></h2><button type="button" data-close>Закрыть</button></div>
-  <form id="commentForm" class="comment-box">
-    <textarea name="text" rows="2" placeholder="Комментарий для агентов. Enter — отправить, Shift+Enter — новая строка. Картинку можно вставить Ctrl+V"></textarea>
-  </form>
-  <div id="cvComments" class="comments"></div>
-  <details><summary>Описание</summary><div id="cvBody" class="md"></div></details>
-  <a id="cvLink" target="_blank" rel="noopener">Открыть на GitHub</a>
-</dialog>
 
-<script src="app.js?v=4"></script>
+<script src="app.js?v=5"></script>
 </body>
 </html>
