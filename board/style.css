@@ -45,7 +45,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .card .foot select { background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 4px 6px; max-width: 120px; }
 .count { color: var(--muted); font-family: var(--mono); font-size: 13px; }
 
-dialog { background: var(--col); color: var(--text); border: 1px solid var(--line); border-radius: 12px; padding: 20px; width: min(480px, calc(100vw - 32px)); }
+dialog { max-height: calc(100vh - 32px); overflow: auto; background: var(--col); color: var(--text); border: 1px solid var(--line); border-radius: 12px; padding: 20px; width: min(480px, calc(100vw - 32px)); }
 dialog.wide { width: min(1100px, calc(100vw - 32px)); }
 dialog::backdrop { background: rgb(0 0 0 / .6); }
 dialog h2 { margin: 0; font-size: 18px; }
@@ -59,7 +59,9 @@ label input:not([type=checkbox]), label select, label textarea, .comment-box tex
 .chip { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; margin: 0; font-weight: 500; }
 .hint { color: var(--muted); font-size: 13px; }
 
-.comment-box { margin-bottom: 14px; }
+.comment-box { margin: 12px 0; }
+#editExtra { border-top: 1px solid var(--line); margin-top: 20px; padding-top: 12px; }
+#editExtra h3 { margin: 0 0 10px; font-size: 16px; }
 .comments { display: grid; gap: 10px; max-height: 55vh; overflow-y: auto; }
 .comment { background: var(--card); border-radius: 8px; padding: 10px 12px; }
 .comment .who { color: var(--muted); font-size: 12px; margin-bottom: 4px; }

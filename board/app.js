@@ -201,18 +201,54 @@ function renderText(text, onPick) {
 
 let current = null;
 
+// Разбор раздела «### Имя» из тела карточки (формат шаблона задач GitHub)
+function section(body, name) {
+  const m = body.match(new RegExp(`### ${name.replace(/[.*+?^${}()|[\]\\/]/g, "\\$&")}\\s*\\n([\\s\\S]*?)(?=\\n### |$)`));
+  const v = m ? m[1].trim() : "";
+  return v === "_No response_" ? "" : v;
+}
+
+// Карточка открывается той же формой, что и при создании, с перепиской ниже
 async function openCard(i) {
+  const form = $("#newForm");
+  resetForm();
   current = i;
-  $("#cvTitle").textContent = i.title;
-  $("#cvBody").replaceChildren(renderText((i.body || "").replace(/<!--[\s\S]*?-->/g, "").trim() || "—", () => {}));
+  $("#formTitle").textContent = `Карточка #${i.number}`;
+  $("#createHint").hidden = true;
+  form.querySelector("button.primary").textContent = "Сохранить изменения";
+  form.title.value = i.title;
+  const raw = (i.body || "").replace(/<!--[\s\S]*?-->/g, "").trim();
+  const eleven = labelNames(i).includes("elevenlabs");
+  form.body.value = eleven ? (section(raw, "Текст для озвучки / что нужно сделать") || raw) : raw;
+  const who = pick(i, "кто:");
+  form.querySelectorAll("[name=who]").forEach((c) => { c.checked = who.includes(c.value); });
+  form.blocker.checked = labelNames(i).includes("блокер запуска");
+  const st = statusOf(i);
+  form.status.value = st.replace(/^\d\d\.\d\d /, "");
+  form.status.dataset.orig = st;
+  form.querySelector(`[name=ai][value=${eleven ? "elevenlabs" : "claude"}]`).checked = true;
+  $("#claudeFields").hidden = eleven;
+  $("#elevenFields").hidden = !eleven;
+  form.model.value = pick(i, "модель:")[0] || "";
+  form.effort.value = pick(i, "мощность:")[0] || "";
+  if (eleven) {
+    const v = section(raw, "Голос");
+    if (v && !VOICES[v]) { form.voice.value = "custom"; form.voiceId.value = v; $("#voiceIdField").hidden = false; }
+    else if (v) form.voice.value = v;
+  }
   $("#cvLink").href = i.html_url;
-  $("#cvComments").innerHTML = `<p class="hint">Загружаю…</p>`;
-  $("#cardView").showModal();
-  const comments = await gh(`/repos/${REPO}/issues/${i.number}/comments?per_page=100`);
+  $("#editExtra").hidden = false;
+  if (!$("#newCard").open) $("#newCard").showModal();
+  await loadComments();
+}
+
+async function loadComments() {
   const box = $("#cvComments");
+  box.innerHTML = `<p class="hint">Загружаю…</p>`;
+  const comments = await gh(`/repos/${REPO}/issues/${current.number}/comments?per_page=100`);
   box.innerHTML = "";
-  // Новые сверху
-  for (const c of comments.reverse()) {
+  // По порядку: старые сверху, новые снизу, поле ответа под ними
+  for (const c of comments) {
     const el = document.createElement("div");
     el.className = "comment";
     el.innerHTML = `<div class="who">${esc(c.user.login)} · ${new Date(c.created_at).toLocaleString("ru")}</div>`;
@@ -220,6 +256,7 @@ async function openCard(i) {
     box.append(el);
   }
   if (!comments.length) box.innerHTML = `<p class="hint">Комментариев пока нет</p>`;
+  box.scrollTop = box.scrollHeight;
 }
 
 async function sendComment(text) {
@@ -227,7 +264,21 @@ async function sendComment(text) {
   await gh(`/repos/${REPO}/issues/${current.number}/comments`, { method: "POST", body: JSON.stringify({ body: text }) });
   current.comments++;
   render();
-  openCard(current);
+  await loadComments();
+}
+
+function resetForm() {
+  const form = $("#newForm");
+  form.reset();
+  current = null;
+  $("#formTitle").textContent = "Новая задача";
+  $("#createHint").hidden = false;
+  form.querySelector("button.primary").textContent = "Сохранить";
+  form.status.dataset.orig = "";
+  $("#claudeFields").hidden = false;
+  $("#elevenFields").hidden = true;
+  $("#voiceIdField").hidden = true;
+  $("#editExtra").hidden = true;
 }
 
 // --- Новая карточка ---
@@ -247,10 +298,15 @@ function fillForm() {
     EFFORTS.map((e) => `<option>${e}</option>`).join("");
 }
 
+// Метки, которыми управляет форма; остальные (колонка, needs-review и т.п.) сохраняются
+const FORM_LABEL = (n) => n.startsWith("кто:") || n.startsWith("модель:") || n.startsWith("мощность:") ||
+  n === "блокер запуска" || n === "elevenlabs";
+
 $("#newForm").addEventListener("submit", async (e) => {
   e.preventDefault();
   const f = new FormData(e.target);
-  const labels = ["колонка:Бэклог"];
+  const editing = current;
+  const labels = editing ? labelNames(editing).filter((n) => !FORM_LABEL(n)) : ["колонка:Бэклог"];
   for (const w of f.getAll("who")) labels.push(`кто:${w}`);
   if (f.get("blocker")) labels.push("блокер запуска");
   const eleven = f.get("ai") === "elevenlabs";
@@ -260,24 +316,31 @@ $("#newForm").addEventListener("submit", async (e) => {
   const now = new Date();
   const dd = `${String(now.getDate()).padStart(2, "0")}.${String(now.getMonth() + 1).padStart(2, "0")}`;
   const status = String(f.get("status") || "").trim();
+  const orig = e.target.status.dataset.orig || "";
+  // Дату статуса обновляем, только если сам текст изменился
+  const statusLine = !status ? "" : orig.replace(/^\d\d\.\d\d /, "") === status ? orig : `${dd} ${status}`;
   let text = String(f.get("body") || "");
   if (eleven) {
     // Формат как у шаблона задачи ElevenLabs: workflow берёт текст и голос из этих разделов
     const voice = f.get("voice") === "custom" ? String(f.get("voiceId") || "").trim() : f.get("voice");
     text = `### Текст для озвучки / что нужно сделать\n\n${text}\n\n### Голос\n\n${voice || "_No response_"}`;
   }
-  const body = text + (status ? `\n\n<!-- статус: ${dd} ${status} -->` : "");
+  const body = text + (statusLine ? `\n\n<!-- статус: ${statusLine} -->` : "");
   const btn = e.target.querySelector("button.primary");
   btn.disabled = true;
   try {
-    const created = await gh(`/repos/${REPO}/issues`, { method: "POST", body: JSON.stringify({ title: f.get("title"), body, labels }) });
-    issues.unshift(created);
+    const payload = JSON.stringify({ title: f.get("title"), body, labels });
+    if (editing) {
+      const updated = await gh(`/repos/${REPO}/issues/${editing.number}`, { method: "PATCH", body: payload });
+      Object.assign(editing, updated);
+      alertInline(btn, "Сохранено");
+    } else {
+      const created = await gh(`/repos/${REPO}/issues`, { method: "POST", body: payload });
+      issues.unshift(created);
+      resetForm();
+      $("#newCard").close();
+    }
     render();
-    e.target.reset();
-    $("#claudeFields").hidden = false;
-    $("#elevenFields").hidden = true;
-    $("#voiceIdField").hidden = true;
-    $("#newCard").close();
   } catch (err) {
     alertInline(btn, `Не удалось сохранить: ${err.message}`);
   } finally {
@@ -300,7 +363,8 @@ $("#loginForm").addEventListener("submit", () => {
   load().catch((err) => logout(err.message));
 });
 
-$("#addBtn").addEventListener("click", () => $("#newCard").showModal());
+$("#addBtn").addEventListener("click", () => { resetForm(); $("#newCard").showModal(); });
+$("#newCard").addEventListener("close", () => { current = null; });
 document.querySelectorAll("[data-close]").forEach((b) => b.addEventListener("click", () => b.closest("dialog").close()));
 enablePaste($("#newForm [name=body]"));
 enablePaste($("#commentForm textarea"));
