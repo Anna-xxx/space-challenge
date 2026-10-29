@@ -11,9 +11,13 @@ const COLUMNS = [
   { name: "Готово", sub: "Закрыто после вашего «да»" },
 ];
 const ROLES = ["Разработчик", "Дизайнер", "SEO-специалист", "Переводчик", "Юрист", "Бизнес-аналитик",
-  "Писатель", "Парсер", "Безопасник", "Тестировщик", "Анна", "ElevenLabs"];
+  "Писатель", "Парсер", "Безопасник", "Тестировщик", "Анна"];
 const MODELS = { opus: "Opus 5.5", sonnet: "Sonnet 5.5", haiku: "Haiku 5.5" };
 const EFFORTS = ["low", "medium", "high", "xhigh", "max"];
+// Стандартные голоса ElevenLabs; любой другой можно указать по ID
+const VOICES = { "21m00Tcm4TlvDq8ikWfM": "Rachel (женский)", "EXAVITQu4vr4xnSDxMaL": "Bella (женский)",
+  "MF3mGyEYCl7XYWbV9V6O": "Elli (женский)", "pNInz6obpgDQGcFmaJgB": "Adam (мужской)",
+  "ErXwobaYiR2CmRWbXPLc": "Antoni (мужской)", "TxGEqnHWrfWFTfGW9XjX": "Josh (мужской)" };
 
 const $ = (s) => document.querySelector(s);
 let token = "";
@@ -231,6 +235,14 @@ function fillForm() {
   $("#whoBoxes").innerHTML = ROLES.map((r) => `<label class="chip"><input type="checkbox" name="who" value="${r}"> ${r}</label>`).join("");
   $("#newForm [name=model]").innerHTML = `<option value="">Claude решит</option>` +
     Object.entries(MODELS).map(([k, v]) => `<option value="${k}">${v}</option>`).join("");
+  $("#newForm [name=voice]").innerHTML = Object.entries(VOICES).map(([id, n]) => `<option value="${id}">${n}</option>`).join("") +
+    `<option value="custom">Свой голос по ID</option>`;
+  $("#newForm [name=voice]").addEventListener("change", (e) => { $("#voiceIdField").hidden = e.target.value !== "custom"; });
+  $("#newForm").querySelectorAll("[name=ai]").forEach((r) => r.addEventListener("change", () => {
+    const eleven = $("#newForm [name=ai]:checked").value === "elevenlabs";
+    $("#claudeFields").hidden = eleven;
+    $("#elevenFields").hidden = !eleven;
+  }));
   $("#newForm [name=effort]").innerHTML = `<option value="">Claude решит</option>` +
     EFFORTS.map((e) => `<option>${e}</option>`).join("");
 }
@@ -239,14 +251,22 @@ $("#newForm").addEventListener("submit", async (e) => {
   e.preventDefault();
   const f = new FormData(e.target);
   const labels = ["колонка:Бэклог"];
-  for (const w of f.getAll("who")) labels.push(w === "ElevenLabs" ? "elevenlabs" : `кто:${w}`);
+  for (const w of f.getAll("who")) labels.push(`кто:${w}`);
   if (f.get("blocker")) labels.push("блокер запуска");
-  if (f.get("model")) labels.push(`модель:${f.get("model")}`);
-  if (f.get("effort")) labels.push(`мощность:${f.get("effort")}`);
+  const eleven = f.get("ai") === "elevenlabs";
+  if (eleven) labels.push("elevenlabs");
+  if (!eleven && f.get("model")) labels.push(`модель:${f.get("model")}`);
+  if (!eleven && f.get("effort")) labels.push(`мощность:${f.get("effort")}`);
   const now = new Date();
   const dd = `${String(now.getDate()).padStart(2, "0")}.${String(now.getMonth() + 1).padStart(2, "0")}`;
   const status = String(f.get("status") || "").trim();
-  const body = String(f.get("body") || "") + (status ? `\n\n<!-- статус: ${dd} ${status} -->` : "");
+  let text = String(f.get("body") || "");
+  if (eleven) {
+    // Формат как у шаблона задачи ElevenLabs: workflow берёт текст и голос из этих разделов
+    const voice = f.get("voice") === "custom" ? String(f.get("voiceId") || "").trim() : f.get("voice");
+    text = `### Текст для озвучки / что нужно сделать\n\n${text}\n\n### Голос\n\n${voice || "_No response_"}`;
+  }
+  const body = text + (status ? `\n\n<!-- статус: ${dd} ${status} -->` : "");
   const btn = e.target.querySelector("button.primary");
   btn.disabled = true;
   try {
@@ -254,6 +274,9 @@ $("#newForm").addEventListener("submit", async (e) => {
     issues.unshift(created);
     render();
     e.target.reset();
+    $("#claudeFields").hidden = false;
+    $("#elevenFields").hidden = true;
+    $("#voiceIdField").hidden = true;
     $("#newCard").close();
   } catch (err) {
     alertInline(btn, `Не удалось сохранить: ${err.message}`);
