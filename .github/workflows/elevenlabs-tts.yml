@@ -24,6 +24,8 @@ jobs:
           python3 - <<'PY'
           import os, re, json
           body = os.environ.get("ISSUE_BODY") or ""
+          # Служебные пометки доски (<!-- статус: … -->) не озвучиваем
+          body = re.sub(r"<!--.*?-->", "", body, flags=re.S)
           def section(name):
               m = re.search(r"### " + re.escape(name) + r"\s*\n(.*?)(?=\n### |\Z)", body, re.S)
               v = m.group(1).strip() if m else ""
