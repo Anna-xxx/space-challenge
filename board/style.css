@@ -60,9 +60,11 @@ label input:not([type=checkbox]), label select, label textarea, .comment-box tex
 .hint { color: var(--muted); font-size: 13px; }
 
 .comment-box { margin: 12px 0; }
-#editExtra { border-top: 1px solid var(--line); margin-top: 20px; padding-top: 12px; }
-#editExtra h3 { margin: 0 0 10px; font-size: 16px; }
-.comments { display: grid; gap: 10px; max-height: 55vh; overflow-y: auto; }
+#editExtra { border-top: 1px solid var(--line); margin-top: 16px; padding-top: 12px; }
+#editExtra h3 { margin: 0 0 10px; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.comment-actions { display: flex; gap: 8px; margin-top: 8px; }
+#cvComments { margin-bottom: 12px; }
+.comments { display: grid; gap: 10px; max-height: 40vh; overflow-y: auto; }
 .comment { background: var(--card); border-radius: 8px; padding: 10px 12px; }
 .comment .who { color: var(--muted); font-size: 12px; margin-bottom: 4px; }
 .comment p { margin: 0 0 6px; white-space: pre-wrap; }

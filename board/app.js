@@ -134,19 +134,22 @@ async function load() {
   render();
 }
 
-// Картинки: файл кладётся в репозиторий (uploads/), в текст вставляется ссылка.
+// Файлы и картинки кладутся в репозиторий (uploads/), в текст вставляется ссылка.
 async function uploadImage(file) {
   const b64 = await new Promise((ok) => {
     const r = new FileReader();
     r.onload = () => ok(String(r.result).split(",")[1]);
     r.readAsDataURL(file);
   });
-  const ext = (file.type.split("/")[1] || "png").replace("jpeg", "jpg");
+  const isImage = file.type.startsWith("image/");
+  const fromName = (file.name || "").match(/\.([A-Za-z0-9]{1,8})$/);
+  const ext = fromName ? fromName[1].toLowerCase() : (file.type.split("/")[1] || "bin").replace("jpeg", "jpg");
   const path = `uploads/${Date.now()}.${ext}`;
   const res = await gh(`/repos/${REPO}/contents/${path}`, {
     method: "PUT", body: JSON.stringify({ message: `Картинка для доски: ${path}`, content: b64 }),
   });
-  return `![картинка](${res.content.html_url}?raw=true)`;
+  const url = `${res.content.html_url}?raw=true`;
+  return isImage ? `![картинка](${url})` : `[${file.name || "файл"}](${url})`;
 }
 
 function enablePaste(textarea) {
@@ -215,7 +218,7 @@ async function openCard(i) {
   current = i;
   $("#formTitle").textContent = `Карточка #${i.number}`;
   $("#createHint").hidden = true;
-  form.querySelector("button.primary").textContent = "Сохранить изменения";
+  $("#saveBtn").textContent = "Сохранить изменения";
   form.title.value = i.title;
   const raw = (i.body || "").replace(/<!--[\s\S]*?-->/g, "").trim();
   const eleven = labelNames(i).includes("elevenlabs");
@@ -247,8 +250,8 @@ async function loadComments() {
   box.innerHTML = `<p class="hint">Загружаю…</p>`;
   const comments = await gh(`/repos/${REPO}/issues/${current.number}/comments?per_page=100`);
   box.innerHTML = "";
-  // По порядку: старые сверху, новые снизу, поле ответа под ними
-  for (const c of comments) {
+  // Поле ответа сверху, под ним переписка: новые сообщения первыми
+  for (const c of comments.reverse()) {
     const el = document.createElement("div");
     el.className = "comment";
     el.innerHTML = `<div class="who">${esc(c.user.login)} · ${new Date(c.created_at).toLocaleString("ru")}</div>`;
@@ -256,7 +259,7 @@ async function loadComments() {
     box.append(el);
   }
   if (!comments.length) box.innerHTML = `<p class="hint">Комментариев пока нет</p>`;
-  box.scrollTop = box.scrollHeight;
+  box.scrollTop = 0;
 }
 
 async function sendComment(text) {
@@ -273,7 +276,7 @@ function resetForm() {
   current = null;
   $("#formTitle").textContent = "Новая задача";
   $("#createHint").hidden = false;
-  form.querySelector("button.primary").textContent = "Сохранить";
+  $("#saveBtn").textContent = "Сохранить";
   form.status.dataset.orig = "";
   $("#claudeFields").hidden = false;
   $("#elevenFields").hidden = true;
@@ -326,7 +329,7 @@ $("#newForm").addEventListener("submit", async (e) => {
     text = `### Текст для озвучки / что нужно сделать\n\n${text}\n\n### Голос\n\n${voice || "_No response_"}`;
   }
   const body = text + (statusLine ? `\n\n<!-- статус: ${statusLine} -->` : "");
-  const btn = e.target.querySelector("button.primary");
+  const btn = $("#saveBtn");
   btn.disabled = true;
   try {
     const payload = JSON.stringify({ title: f.get("title"), body, labels });
@@ -348,12 +351,38 @@ $("#newForm").addEventListener("submit", async (e) => {
   }
 });
 
-$("#commentForm textarea").addEventListener("keydown", (e) => {
+function submitComment() {
+  const ta = $("#commentText");
+  const text = ta.value;
+  if (!text.trim()) return;
+  ta.value = "";
+  sendComment(text).catch((err) => { ta.value = text; alertInline(ta, err.message); });
+}
+
+$("#commentText").addEventListener("keydown", (e) => {
   if (e.key === "Enter" && !e.shiftKey && !e.isComposing) {
     e.preventDefault();
-    const text = e.target.value;
-    e.target.value = "";
-    sendComment(text).catch((err) => { e.target.value = text; alertInline(e.target, err.message); });
+    submitComment();
+  }
+});
+$("#sendBtn").addEventListener("click", submitComment);
+$("#attachBtn").addEventListener("click", () => $("#attachInput").click());
+$("#attachInput").addEventListener("change", async (e) => {
+  const file = e.target.files[0];
+  e.target.value = "";
+  if (!file) return;
+  const ta = $("#commentText");
+  const btn = $("#attachBtn");
+  btn.disabled = true;
+  btn.textContent = "Загружаю…";
+  try {
+    const md = await uploadImage(file);
+    ta.value = (ta.value ? ta.value + "\n" : "") + md;
+  } catch (err) {
+    alertInline(btn, `Файл загрузить не удалось: ${err.message}`);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Прикрепить файл";
   }
 });
 
@@ -367,7 +396,7 @@ $("#addBtn").addEventListener("click", () => { resetForm(); $("#newCard").showMo
 $("#newCard").addEventListener("close", () => { current = null; });
 document.querySelectorAll("[data-close]").forEach((b) => b.addEventListener("click", () => b.closest("dialog").close()));
 enablePaste($("#newForm [name=body]"));
-enablePaste($("#commentForm textarea"));
+enablePaste($("#commentText"));
 
 fillForm();
 $("#loginBtn").addEventListener("click", () => $("#login").showModal());
