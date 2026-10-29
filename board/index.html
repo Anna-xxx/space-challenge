@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Доска хаба</title>
-<link rel="stylesheet" href="style.css?v=5">
+<link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
 <header class="top">
@@ -36,6 +36,15 @@
         <label>Что сделать<input name="title" required></label>
         <label>Описание<textarea name="body" rows="5" placeholder="Детали, ссылки, критерии готовности. Картинку можно вставить сюда (Ctrl+V)"></textarea></label>
         <p class="hint" id="createHint">Карточка попадёт в «Бэклог». Claude ответит в комментариях: как понял задачу, кому отдаёт и какой ИИ нужен. Работа начнётся после вашего «да».</p>
+      <!-- Только при открытии существующей карточки: переписка сверху вниз, поле ответа внизу -->
+      <section id="editExtra" hidden>
+      <h3>Комментарии</h3>
+      <div id="cvComments" class="comments"></div>
+      <div id="commentForm" class="comment-box">
+      <textarea name="text" rows="2" placeholder="Комментарий для агентов. Enter — отправить, Shift+Enter — новая строка. Картинку можно вставить Ctrl+V"></textarea>
+      </div>
+      <a id="cvLink" target="_blank" rel="noopener">Открыть на GitHub</a>
+      </section>
       </div>
       <aside class="side">
         <div class="field-title">Кто делает</div>
@@ -63,18 +72,9 @@
       </aside>
     </div>
   </form>
-  <!-- Только при открытии существующей карточки: переписка сверху вниз, поле ответа внизу -->
-  <section id="editExtra" hidden>
-    <h3>Комментарии</h3>
-    <div id="cvComments" class="comments"></div>
-    <form id="commentForm" class="comment-box">
-      <textarea name="text" rows="2" placeholder="Комментарий для агентов. Enter — отправить, Shift+Enter — новая строка. Картинку можно вставить Ctrl+V"></textarea>
-    </form>
-    <a id="cvLink" target="_blank" rel="noopener">Открыть на GitHub</a>
-  </section>
 </dialog>
 
 
-<script src="app.js?v=5"></script>
+<script src="app.js?v=6"></script>
 </body>
 </html>
