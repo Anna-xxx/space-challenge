@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Доска хаба</title>
-<link rel="stylesheet" href="style.css?v=6">
+<link rel="stylesheet" href="style.css?v=7">
 </head>
 <body>
 <header class="top">
@@ -38,12 +38,18 @@
         <p class="hint" id="createHint">Карточка попадёт в «Бэклог». Claude ответит в комментариях: как понял задачу, кому отдаёт и какой ИИ нужен. Работа начнётся после вашего «да».</p>
       <!-- Только при открытии существующей карточки: переписка сверху вниз, поле ответа внизу -->
       <section id="editExtra" hidden>
-      <h3>Комментарии</h3>
-      <div id="cvComments" class="comments"></div>
-      <div id="commentForm" class="comment-box">
-      <textarea name="text" rows="2" placeholder="Комментарий для агентов. Enter — отправить, Shift+Enter — новая строка. Картинку можно вставить Ctrl+V"></textarea>
-      </div>
-      <a id="cvLink" target="_blank" rel="noopener">Открыть на GitHub</a>
+        <h3>Комментарии</h3>
+        <div id="commentForm" class="comment-box">
+          <label for="commentText">Новый комментарий</label>
+          <textarea id="commentText" name="text" rows="4" placeholder="Сообщение, ссылка или вставьте файл. Enter — отправить, Shift+Enter — новая строка"></textarea>
+          <div class="comment-actions">
+            <button type="button" id="sendBtn" class="primary">Отправить</button>
+            <button type="button" id="attachBtn">Прикрепить файл</button>
+            <input type="file" id="attachInput" hidden>
+          </div>
+        </div>
+        <div id="cvComments" class="comments"></div>
+        <a id="cvLink" target="_blank" rel="noopener">Открыть на GitHub</a>
       </section>
       </div>
       <aside class="side">
@@ -68,13 +74,13 @@
           <label id="voiceIdField" hidden>ID голоса<input name="voiceId" placeholder="Из библиотеки голосов ElevenLabs"></label>
           <p class="hint">В «Описание» пишите только текст для озвучки. Готовый mp3 придёт ссылкой в комментариях.</p>
         </div>
-        <button class="primary">Сохранить</button>
+        <button id="saveBtn" class="primary">Сохранить</button>
       </aside>
     </div>
   </form>
 </dialog>
 
 
-<script src="app.js?v=6"></script>
+<script src="app.js?v=7"></script>
 </body>
 </html>
