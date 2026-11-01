@@ -126,7 +126,8 @@ async function load() {
     list.push(...chunk);
     if (chunk.length < 100) break;
   }
-  issues = list;
+  // Удалённые карточки закрыты как «не планируется» и на доске не показываются
+  issues = list.filter((i) => i.state_reason !== "not_planned");
   $("#conn").textContent = "Claude на связи";
   $("#conn").classList.add("ok");
   $("#loginBtn").hidden = true;
@@ -219,6 +220,7 @@ async function openCard(i) {
   $("#formTitle").textContent = `Карточка #${i.number}`;
   $("#createHint").hidden = true;
   $("#saveBtn").textContent = "Сохранить изменения";
+  $("#deleteBtn").hidden = false;
   form.title.value = i.title;
   const raw = (i.body || "").replace(/<!--[\s\S]*?-->/g, "").trim();
   const eleven = labelNames(i).includes("elevenlabs");
@@ -282,6 +284,7 @@ function resetForm() {
   $("#elevenFields").hidden = true;
   $("#voiceIdField").hidden = true;
   $("#editExtra").hidden = true;
+  $("#deleteBtn").hidden = true;
 }
 
 // --- Новая карточка ---
@@ -403,3 +406,30 @@ $("#loginBtn").addEventListener("click", () => $("#login").showModal());
 // Если токен не подошёл или сеть недоступна, окно входа откроется снова.
 if (token) load().catch((err) => logout(err.message)); else $("#login").showModal();
 setInterval(() => { if (token && !document.querySelector("dialog[open]")) load().catch(() => {}); }, 60000);
+
+// Удаление: GitHub не даёт стереть задачу без прав администратора, поэтому карточка
+// закрывается как «не планируется» и пропадает с доски. Вернуть можно на GitHub.
+$("#deleteBtn").addEventListener("click", async () => {
+  const card = current;
+  if (!card) return;
+  const btn = $("#deleteBtn");
+  if (btn.dataset.confirm !== String(card.number)) {
+    btn.dataset.confirm = card.number;
+    btn.textContent = "Точно удалить?";
+    return;
+  }
+  btn.disabled = true;
+  try {
+    await gh(`/repos/${REPO}/issues/${card.number}`, { method: "PATCH", body: JSON.stringify({ state: "closed", state_reason: "not_planned" }) });
+    issues = issues.filter((i) => i.number !== card.number);
+    resetForm();
+    $("#newCard").close();
+    render();
+  } catch (err) {
+    alertInline(btn, `Не удалось удалить: ${err.message}`);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Удалить";
+    delete btn.dataset.confirm;
+  }
+});

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Доска хаба</title>
-<link rel="stylesheet" href="style.css?v=7">
+<link rel="stylesheet" href="style.css?v=8">
 </head>
 <body>
 <header class="top">
@@ -74,13 +74,16 @@
           <label id="voiceIdField" hidden>ID голоса<input name="voiceId" placeholder="Из библиотеки голосов ElevenLabs"></label>
           <p class="hint">В «Описание» пишите только текст для озвучки. Готовый mp3 придёт ссылкой в комментариях.</p>
         </div>
-        <button id="saveBtn" class="primary">Сохранить</button>
+        <div class="save-row">
+          <button id="saveBtn" class="primary">Сохранить</button>
+          <button type="button" id="deleteBtn" class="danger" hidden>Удалить</button>
+        </div>
       </aside>
     </div>
   </form>
 </dialog>
 
 
-<script src="app.js?v=7"></script>
+<script src="app.js?v=8"></script>
 </body>
 </html>
