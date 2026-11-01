@@ -81,3 +81,5 @@ details { margin: 14px 0; }
   .grid { grid-template-columns: 1fr; }
 }
 .error { color: #ffb4a8; background: #3a1d1d; border-radius: 8px; padding: 8px 10px; font-size: 14px; }
+.save-row { display: flex; justify-content: space-between; gap: 8px; }
+button.danger { color: #ffb4a8; }

@@ -24,6 +24,7 @@ jobs:
     env:
       ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
       ISSUE_BODY: ${{ github.event.issue.body }}
+      ISSUE_TITLE: ${{ github.event.issue.title }}
       # Голос по умолчанию (Rachel); можно указать свой в поле «Голос» задачи
       DEFAULT_VOICE: 21m00Tcm4TlvDq8ikWfM
     steps:
@@ -39,7 +40,8 @@ jobs:
               m = re.search(r"### " + re.escape(name) + r"\s*\n(.*?)(?=\n### |\Z)", body, re.S)
               v = m.group(1).strip() if m else ""
               return "" if v == "_No response_" else v
-          text = section("Текст для озвучки / что нужно сделать") or body.strip()
+          # Пустое описание: озвучиваем название карточки, а не служебные заголовки
+          text = section("Текст для озвучки / что нужно сделать") or os.environ.get("ISSUE_TITLE", "").strip()
           voice = section("Голос") or os.environ["DEFAULT_VOICE"]
           json.dump({"text": text, "model_id": "eleven_multilingual_v2"}, open("payload.json", "w"), ensure_ascii=False)
           open(os.environ["GITHUB_OUTPUT"], "a").write(f"voice={voice}\n")
