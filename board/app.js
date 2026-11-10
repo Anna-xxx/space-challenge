@@ -95,6 +95,7 @@ function cardEl(i) {
     <div class="tags">
       ${pick(i, "кто:").map((r) => `<span class="tag">${esc(r)}</span>`).join("")}
       ${labelNames(i).includes("elevenlabs") ? `<span class="tag">ElevenLabs</span>` : ""}
+      ${labelNames(i).includes("chatgpt") ? `<span class="tag">ChatGPT</span>` : ""}
       ${labelNames(i).includes("блокер запуска") ? `<span class="tag block">Блокер запуска</span>` : ""}
       ${model || effort ? `<span class="tag ai">${esc(MODELS[model] || "Claude решит")} · ${esc(effort || "—")}</span>` : ""}
     </div>
@@ -224,6 +225,7 @@ async function openCard(i) {
   form.title.value = i.title;
   const raw = (i.body || "").replace(/<!--[\s\S]*?-->/g, "").trim();
   const eleven = labelNames(i).includes("elevenlabs");
+  const chatgpt = labelNames(i).includes("chatgpt");
   form.body.value = eleven ? (section(raw, "Текст для озвучки / что нужно сделать") || raw) : raw;
   const who = pick(i, "кто:");
   form.querySelectorAll("[name=who]").forEach((c) => { c.checked = who.includes(c.value); });
@@ -231,9 +233,10 @@ async function openCard(i) {
   const st = statusOf(i);
   form.status.value = st.replace(/^\d\d\.\d\d /, "");
   form.status.dataset.orig = st;
-  form.querySelector(`[name=ai][value=${eleven ? "elevenlabs" : "claude"}]`).checked = true;
-  $("#claudeFields").hidden = eleven;
+  form.querySelector(`[name=ai][value=${eleven ? "elevenlabs" : chatgpt ? "chatgpt" : "claude"}]`).checked = true;
+  $("#claudeFields").hidden = eleven || chatgpt;
   $("#elevenFields").hidden = !eleven;
+  $("#chatgptFields").hidden = !chatgpt;
   form.model.value = pick(i, "модель:")[0] || "";
   form.effort.value = pick(i, "мощность:")[0] || "";
   if (eleven) {
@@ -282,6 +285,7 @@ function resetForm() {
   form.status.dataset.orig = "";
   $("#claudeFields").hidden = false;
   $("#elevenFields").hidden = true;
+  $("#chatgptFields").hidden = true;
   $("#voiceIdField").hidden = true;
   $("#editExtra").hidden = true;
   $("#deleteBtn").hidden = true;
@@ -296,9 +300,10 @@ function fillForm() {
     `<option value="custom">Свой голос по ID</option>`;
   $("#newForm [name=voice]").addEventListener("change", (e) => { $("#voiceIdField").hidden = e.target.value !== "custom"; });
   $("#newForm").querySelectorAll("[name=ai]").forEach((r) => r.addEventListener("change", () => {
-    const eleven = $("#newForm [name=ai]:checked").value === "elevenlabs";
-    $("#claudeFields").hidden = eleven;
-    $("#elevenFields").hidden = !eleven;
+    const selected = $("#newForm [name=ai]:checked").value;
+    $("#claudeFields").hidden = selected !== "claude";
+    $("#elevenFields").hidden = selected !== "elevenlabs";
+    $("#chatgptFields").hidden = selected !== "chatgpt";
   }));
   $("#newForm [name=effort]").innerHTML = `<option value="">Claude решит</option>` +
     EFFORTS.map((e) => `<option>${e}</option>`).join("");
@@ -306,7 +311,7 @@ function fillForm() {
 
 // Метки, которыми управляет форма; остальные (колонка, needs-review и т.п.) сохраняются
 const FORM_LABEL = (n) => n.startsWith("кто:") || n.startsWith("модель:") || n.startsWith("мощность:") ||
-  n === "блокер запуска" || n === "elevenlabs";
+  n === "блокер запуска" || n === "elevenlabs" || n === "chatgpt";
 
 $("#newForm").addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -315,10 +320,12 @@ $("#newForm").addEventListener("submit", async (e) => {
   const labels = editing ? labelNames(editing).filter((n) => !FORM_LABEL(n)) : ["колонка:Бэклог"];
   for (const w of f.getAll("who")) labels.push(`кто:${w}`);
   if (f.get("blocker")) labels.push("блокер запуска");
-  const eleven = f.get("ai") === "elevenlabs";
+  const ai = f.get("ai");
+  const eleven = ai === "elevenlabs";
   if (eleven) labels.push("elevenlabs");
-  if (!eleven && f.get("model")) labels.push(`модель:${f.get("model")}`);
-  if (!eleven && f.get("effort")) labels.push(`мощность:${f.get("effort")}`);
+  if (ai === "chatgpt") labels.push("chatgpt");
+  if (ai === "claude" && f.get("model")) labels.push(`модель:${f.get("model")}`);
+  if (ai === "claude" && f.get("effort")) labels.push(`мощность:${f.get("effort")}`);
   const now = new Date();
   const dd = `${String(now.getDate()).padStart(2, "0")}.${String(now.getMonth() + 1).padStart(2, "0")}`;
   const status = String(f.get("status") || "").trim();
