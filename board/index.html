@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Доска хаба</title>
-<link rel="stylesheet" href="style.css?v=8">
+<link rel="stylesheet" href="style.css?v=9">
 </head>
 <body>
 <header class="top">
@@ -63,11 +63,15 @@
         <div class="chips">
           <label class="chip"><input type="radio" name="ai" value="claude" checked> Claude</label>
           <label class="chip"><input type="radio" name="ai" value="elevenlabs"> ElevenLabs</label>
+          <label class="chip"><input type="radio" name="ai" value="chatgpt"> ChatGPT</label>
         </div>
         <div id="claudeFields">
           <label>Модель ИИ<select name="model"></select></label>
           <label>Мощность<select name="effort"></select></label>
           <p class="hint">Агент работает этой моделью и мощностью. Пусто: выберет Claude</p>
+        </div>
+        <div id="chatgptFields" hidden>
+          <p class="hint">Задача для ChatGPT. Выбор сохранится в GitHub. Автоматический запуск ChatGPT из доски пока не настроен.</p>
         </div>
         <div id="elevenFields" hidden>
           <label>Голос<select name="voice"></select></label>
@@ -84,6 +88,6 @@
 </dialog>
 
 
-<script src="app.js?v=8"></script>
+<script src="app.js?v=9"></script>
 </body>
 </html>
