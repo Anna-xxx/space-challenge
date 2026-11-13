@@ -114,3 +114,4 @@
 - ba/sputnik-blok-dlya-prezentatsii.md: блок про Спутника для презентации (EN, 5 предложений + тезисы).
 - ba/zemlya-chto-vidit-vrach.md: что сегодня видит врач полёта на Земле, как реагирует, проблемы и наше решение (12.11, источники NASA/CSA/NTRS).
 - ba/ekran-bortmedika-otsenka-sostoyaniya.md: экран бортмедика «Оценка состояния», помощь Спутника в диагнозе для Марии и врача (12.11).
+- ba/server-trebovaniya.md: требования БА к серверу (13.11).
