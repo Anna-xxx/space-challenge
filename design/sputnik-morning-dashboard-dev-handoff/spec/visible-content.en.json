@@ -1,0 +1,125 @@
+{
+  "screen": "Morning Dashboard (after sign-in)",
+  "language": "en",
+  "brand": "SPUTNIK 2.0",
+  "navigation": [
+    "Morning",
+    "Trends",
+    "Doctor",
+    "Profile"
+  ],
+  "status": {
+    "network": "Onboard network",
+    "mission": "MARS MISSION · DAY 186",
+    "battery": "92%",
+    "emergency": "Emergency"
+  },
+  "hero": {
+    "headline": "Good morning, Alex.",
+    "subtitle": "Here’s your morning plan — routine checks and today’s medical tasks in the right order."
+  },
+  "plan": {
+    "title": "Your morning plan",
+    "description": "Complete in one session, ≈ 8–10 min",
+    "progress_demo": "0 of 6 completed",
+    "cta": "Start morning plan",
+    "routine": {
+      "title": "Daily check (routine)",
+      "summary": "4 steps · ≈ 3 min",
+      "items": [
+        {
+          "key": "blood_pressure",
+          "label": "Blood pressure",
+          "duration": "≈ 1 min",
+          "source": "cuff"
+        },
+        {
+          "key": "body_temperature",
+          "label": "Temperature",
+          "duration": "≈ 15 sec",
+          "source": "ear_thermometer"
+        },
+        {
+          "key": "mood_symptoms",
+          "label": "Mood & symptoms",
+          "duration": "≈ 30 sec",
+          "source": "manual_input"
+        },
+        {
+          "key": "oxygen",
+          "label": "Blood oxygen (SpO₂)",
+          "duration": "≈ 30 sec",
+          "tag": "Added today",
+          "source": "finger_pulse_oximeter"
+        }
+      ]
+    },
+    "doctor_orders": {
+      "title": "Doctor’s orders (today)",
+      "summary": "2 tasks · ≈ 5–7 min",
+      "items": [
+        {
+          "key": "blood_test",
+          "label": "Blood test",
+          "priority": "Fasting · before breakfast",
+          "duration": "≈ 5 min",
+          "badge": "★ Do first"
+        },
+        {
+          "key": "urine_test",
+          "label": "Urine test",
+          "priority": "Before 10:00",
+          "duration": "≈ 2 min"
+        }
+      ]
+    }
+  },
+  "overnight": {
+    "title": "Overnight summary",
+    "metrics": [
+      {
+        "key": "sleep",
+        "label": "Sleep",
+        "value": "6h 12m",
+        "comparison": "Usual: 7h 10m"
+      },
+      {
+        "key": "co2",
+        "label": "CO₂ (cabin)",
+        "value": "↑ 1,200 ppm",
+        "comparison": "Higher than usual"
+      },
+      {
+        "key": "spo2",
+        "label": "Oxygen (SpO₂)",
+        "value": "96 %",
+        "comparison": "Usual: 97–99 %"
+      }
+    ],
+    "alert": "Cabin CO₂ was higher than usual. I’ve added an oxygen check today."
+  },
+  "doctor": {
+    "title": "From your doctor",
+    "unread": "1 new message",
+    "name": "Dr. Rivera",
+    "message": "Please complete the scheduled blood and urine tests today. We’ll review the results at the next Earth contact."
+  },
+  "schedule": {
+    "title": "Today’s schedule",
+    "items": [
+      {
+        "time": "06:40 – 07:00",
+        "text": "Morning plan (checks + tests)"
+      },
+      {
+        "time": "14:00",
+        "text": "Ultrasound (bone & muscle)"
+      }
+    ]
+  },
+  "sputnik": {
+    "title": "Sputnik · Your onboard companion",
+    "message": "“Your sleep was shorter than usual, and cabin CO₂ was elevated. We’ll start with the blood test (fasting), then complete the morning check and urine test.”",
+    "action": "Talk to Sputnik"
+  }
+}
