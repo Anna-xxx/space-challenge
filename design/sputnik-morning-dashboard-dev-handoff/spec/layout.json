@@ -1,0 +1,760 @@
+{
+  "meta": {
+    "reference": "reference/approved-morning-screen.png",
+    "source_px": [
+      1672,
+      941
+    ],
+    "logical_stage_px": [
+      1280,
+      720
+    ],
+    "scale_to_stage": {
+      "x": 0.76555,
+      "y": 0.765143
+    },
+    "notes": "Estimated rectangles measured from a raster. Never substitute crops for interactive components."
+  },
+  "regions": [
+    {
+      "id": "brand-logo-in-screenshot",
+      "number": 1,
+      "file": "crops/01-brand-logo-in-screenshot.png",
+      "section": "Brand",
+      "role": "reference crop",
+      "source_bbox_px": {
+        "x": 64,
+        "y": 9,
+        "width": 172,
+        "height": 60
+      },
+      "stage_bbox_px_approx": {
+        "x": 49.0,
+        "y": 6.9,
+        "width": 131.7,
+        "height": 45.9
+      },
+      "baked_background": true
+    },
+    {
+      "id": "header-nav",
+      "number": 2,
+      "file": "crops/02-header-nav.png",
+      "section": "Header",
+      "role": "functional container",
+      "source_bbox_px": {
+        "x": 268,
+        "y": 8,
+        "width": 675,
+        "height": 65
+      },
+      "stage_bbox_px_approx": {
+        "x": 205.2,
+        "y": 6.1,
+        "width": 516.7,
+        "height": 49.7
+      },
+      "baked_background": true
+    },
+    {
+      "id": "morning-tab-selected",
+      "number": 3,
+      "file": "crops/03-morning-tab-selected.png",
+      "section": "Header",
+      "role": "selected nav item",
+      "source_bbox_px": {
+        "x": 317,
+        "y": 15,
+        "width": 160,
+        "height": 51
+      },
+      "stage_bbox_px_approx": {
+        "x": 242.7,
+        "y": 11.5,
+        "width": 122.5,
+        "height": 39.0
+      },
+      "baked_background": true
+    },
+    {
+      "id": "onboard-network",
+      "number": 4,
+      "file": "crops/04-onboard-network.png",
+      "section": "Header",
+      "role": "status pill",
+      "source_bbox_px": {
+        "x": 953,
+        "y": 17,
+        "width": 178,
+        "height": 47
+      },
+      "stage_bbox_px_approx": {
+        "x": 729.6,
+        "y": 13.0,
+        "width": 136.3,
+        "height": 36.0
+      },
+      "baked_background": true
+    },
+    {
+      "id": "mission-day",
+      "number": 5,
+      "file": "crops/05-mission-day.png",
+      "section": "Header",
+      "role": "status pill",
+      "source_bbox_px": {
+        "x": 1135,
+        "y": 17,
+        "width": 219,
+        "height": 47
+      },
+      "stage_bbox_px_approx": {
+        "x": 868.9,
+        "y": 13.0,
+        "width": 167.7,
+        "height": 36.0
+      },
+      "baked_background": true
+    },
+    {
+      "id": "battery",
+      "number": 6,
+      "file": "crops/06-battery.png",
+      "section": "Header",
+      "role": "status pill",
+      "source_bbox_px": {
+        "x": 1363,
+        "y": 18,
+        "width": 93,
+        "height": 46
+      },
+      "stage_bbox_px_approx": {
+        "x": 1043.4,
+        "y": 13.8,
+        "width": 71.2,
+        "height": 35.2
+      },
+      "baked_background": true
+    },
+    {
+      "id": "emergency",
+      "number": 7,
+      "file": "crops/07-emergency.png",
+      "section": "Header",
+      "role": "primary safety control",
+      "source_bbox_px": {
+        "x": 1476,
+        "y": 11,
+        "width": 153,
+        "height": 55
+      },
+      "stage_bbox_px_approx": {
+        "x": 1130.0,
+        "y": 8.4,
+        "width": 117.1,
+        "height": 42.1
+      },
+      "baked_background": true
+    },
+    {
+      "id": "headline-and-subtitle",
+      "number": 8,
+      "file": "crops/08-headline-and-subtitle.png",
+      "section": "Heading",
+      "role": "editable text",
+      "source_bbox_px": {
+        "x": 65,
+        "y": 84,
+        "width": 807,
+        "height": 81
+      },
+      "stage_bbox_px_approx": {
+        "x": 49.8,
+        "y": 64.3,
+        "width": 617.8,
+        "height": 62.0
+      },
+      "baked_background": true
+    },
+    {
+      "id": "mars-horizon-reference",
+      "number": 9,
+      "file": "crops/09-mars-horizon-reference.png",
+      "section": "Decor",
+      "role": "reference only; no standalone alpha",
+      "source_bbox_px": {
+        "x": 1015,
+        "y": 78,
+        "width": 657,
+        "height": 109
+      },
+      "stage_bbox_px_approx": {
+        "x": 777.0,
+        "y": 59.7,
+        "width": 503.0,
+        "height": 83.4
+      },
+      "baked_background": true
+    },
+    {
+      "id": "tiny-earth-reference",
+      "number": 10,
+      "file": "crops/10-tiny-earth-reference.png",
+      "section": "Decor",
+      "role": "reference only",
+      "source_bbox_px": {
+        "x": 1097,
+        "y": 105,
+        "width": 37,
+        "height": 38
+      },
+      "stage_bbox_px_approx": {
+        "x": 839.8,
+        "y": 80.3,
+        "width": 28.3,
+        "height": 29.1
+      },
+      "baked_background": true
+    },
+    {
+      "id": "left-plan-card",
+      "number": 11,
+      "file": "crops/11-left-plan-card.png",
+      "section": "Left column",
+      "role": "full raster crop; baked background",
+      "source_bbox_px": {
+        "x": 49,
+        "y": 185,
+        "width": 933,
+        "height": 573
+      },
+      "stage_bbox_px_approx": {
+        "x": 37.5,
+        "y": 141.6,
+        "width": 714.3,
+        "height": 438.4
+      },
+      "baked_background": true
+    },
+    {
+      "id": "plan-heading",
+      "number": 12,
+      "file": "crops/12-plan-heading.png",
+      "section": "Left column",
+      "role": "card title and progress",
+      "source_bbox_px": {
+        "x": 77,
+        "y": 199,
+        "width": 875,
+        "height": 76
+      },
+      "stage_bbox_px_approx": {
+        "x": 58.9,
+        "y": 152.3,
+        "width": 669.9,
+        "height": 58.2
+      },
+      "baked_background": true
+    },
+    {
+      "id": "six-step-indicator",
+      "number": 13,
+      "file": "crops/13-six-step-indicator.png",
+      "section": "Left column",
+      "role": "six mini progress segments",
+      "source_bbox_px": {
+        "x": 688,
+        "y": 239,
+        "width": 258,
+        "height": 25
+      },
+      "stage_bbox_px_approx": {
+        "x": 526.7,
+        "y": 182.9,
+        "width": 197.5,
+        "height": 19.1
+      },
+      "baked_background": true
+    },
+    {
+      "id": "daily-check-panel",
+      "number": 14,
+      "file": "crops/14-daily-check-panel.png",
+      "section": "Left column",
+      "role": "collapsible group",
+      "source_bbox_px": {
+        "x": 78,
+        "y": 283,
+        "width": 876,
+        "height": 214
+      },
+      "stage_bbox_px_approx": {
+        "x": 59.7,
+        "y": 216.5,
+        "width": 670.6,
+        "height": 163.7
+      },
+      "baked_background": true
+    },
+    {
+      "id": "daily-check-header",
+      "number": 15,
+      "file": "crops/15-daily-check-header.png",
+      "section": "Left column",
+      "role": "group title",
+      "source_bbox_px": {
+        "x": 91,
+        "y": 289,
+        "width": 858,
+        "height": 49
+      },
+      "stage_bbox_px_approx": {
+        "x": 69.7,
+        "y": 221.1,
+        "width": 656.8,
+        "height": 37.5
+      },
+      "baked_background": true
+    },
+    {
+      "id": "routine-blood-pressure-row",
+      "number": 16,
+      "file": "crops/16-routine-blood-pressure-row.png",
+      "section": "Left column",
+      "role": "row",
+      "source_bbox_px": {
+        "x": 95,
+        "y": 340,
+        "width": 853,
+        "height": 36
+      },
+      "stage_bbox_px_approx": {
+        "x": 72.7,
+        "y": 260.1,
+        "width": 653.0,
+        "height": 27.5
+      },
+      "baked_background": true
+    },
+    {
+      "id": "routine-temperature-row",
+      "number": 17,
+      "file": "crops/17-routine-temperature-row.png",
+      "section": "Left column",
+      "role": "row",
+      "source_bbox_px": {
+        "x": 95,
+        "y": 377,
+        "width": 853,
+        "height": 35
+      },
+      "stage_bbox_px_approx": {
+        "x": 72.7,
+        "y": 288.5,
+        "width": 653.0,
+        "height": 26.8
+      },
+      "baked_background": true
+    },
+    {
+      "id": "routine-mood-row",
+      "number": 18,
+      "file": "crops/18-routine-mood-row.png",
+      "section": "Left column",
+      "role": "row",
+      "source_bbox_px": {
+        "x": 95,
+        "y": 413,
+        "width": 853,
+        "height": 37
+      },
+      "stage_bbox_px_approx": {
+        "x": 72.7,
+        "y": 316.0,
+        "width": 653.0,
+        "height": 28.3
+      },
+      "baked_background": true
+    },
+    {
+      "id": "routine-oxygen-row",
+      "number": 19,
+      "file": "crops/19-routine-oxygen-row.png",
+      "section": "Left column",
+      "role": "row and added-today badge",
+      "source_bbox_px": {
+        "x": 95,
+        "y": 450,
+        "width": 853,
+        "height": 43
+      },
+      "stage_bbox_px_approx": {
+        "x": 72.7,
+        "y": 344.3,
+        "width": 653.0,
+        "height": 32.9
+      },
+      "baked_background": true
+    },
+    {
+      "id": "doctor-orders-panel",
+      "number": 20,
+      "file": "crops/20-doctor-orders-panel.png",
+      "section": "Left column",
+      "role": "collapsible group",
+      "source_bbox_px": {
+        "x": 79,
+        "y": 514,
+        "width": 876,
+        "height": 152
+      },
+      "stage_bbox_px_approx": {
+        "x": 60.5,
+        "y": 393.3,
+        "width": 670.6,
+        "height": 116.3
+      },
+      "baked_background": true
+    },
+    {
+      "id": "doctor-order-header",
+      "number": 21,
+      "file": "crops/21-doctor-order-header.png",
+      "section": "Left column",
+      "role": "group title",
+      "source_bbox_px": {
+        "x": 94,
+        "y": 520,
+        "width": 853,
+        "height": 49
+      },
+      "stage_bbox_px_approx": {
+        "x": 72.0,
+        "y": 397.9,
+        "width": 653.0,
+        "height": 37.5
+      },
+      "baked_background": true
+    },
+    {
+      "id": "doctor-blood-test-row",
+      "number": 22,
+      "file": "crops/22-doctor-blood-test-row.png",
+      "section": "Left column",
+      "role": "priority row",
+      "source_bbox_px": {
+        "x": 98,
+        "y": 569,
+        "width": 840,
+        "height": 44
+      },
+      "stage_bbox_px_approx": {
+        "x": 75.0,
+        "y": 435.4,
+        "width": 643.1,
+        "height": 33.7
+      },
+      "baked_background": true
+    },
+    {
+      "id": "doctor-urine-test-row",
+      "number": 23,
+      "file": "crops/23-doctor-urine-test-row.png",
+      "section": "Left column",
+      "role": "row",
+      "source_bbox_px": {
+        "x": 96,
+        "y": 614,
+        "width": 843,
+        "height": 46
+      },
+      "stage_bbox_px_approx": {
+        "x": 73.5,
+        "y": 469.8,
+        "width": 645.4,
+        "height": 35.2
+      },
+      "baked_background": true
+    },
+    {
+      "id": "morning-start-cta",
+      "number": 24,
+      "file": "crops/24-morning-start-cta.png",
+      "section": "Left column",
+      "role": "primary action",
+      "source_bbox_px": {
+        "x": 78,
+        "y": 679,
+        "width": 881,
+        "height": 59
+      },
+      "stage_bbox_px_approx": {
+        "x": 59.7,
+        "y": 519.5,
+        "width": 674.4,
+        "height": 45.1
+      },
+      "baked_background": true
+    },
+    {
+      "id": "overnight-summary-card",
+      "number": 25,
+      "file": "crops/25-overnight-summary-card.png",
+      "section": "Right column",
+      "role": "full card",
+      "source_bbox_px": {
+        "x": 1000,
+        "y": 186,
+        "width": 618,
+        "height": 213
+      },
+      "stage_bbox_px_approx": {
+        "x": 765.6,
+        "y": 142.3,
+        "width": 473.1,
+        "height": 163.0
+      },
+      "baked_background": true
+    },
+    {
+      "id": "overnight-summary-metrics",
+      "number": 26,
+      "file": "crops/26-overnight-summary-metrics.png",
+      "section": "Right column",
+      "role": "three metrics",
+      "source_bbox_px": {
+        "x": 1023,
+        "y": 244,
+        "width": 571,
+        "height": 96
+      },
+      "stage_bbox_px_approx": {
+        "x": 783.2,
+        "y": 186.7,
+        "width": 437.1,
+        "height": 73.5
+      },
+      "baked_background": true
+    },
+    {
+      "id": "co2-alert-banner",
+      "number": 27,
+      "file": "crops/27-co2-alert-banner.png",
+      "section": "Right column",
+      "role": "alert",
+      "source_bbox_px": {
+        "x": 1021,
+        "y": 341,
+        "width": 574,
+        "height": 44
+      },
+      "stage_bbox_px_approx": {
+        "x": 781.6,
+        "y": 260.9,
+        "width": 439.4,
+        "height": 33.7
+      },
+      "baked_background": true
+    },
+    {
+      "id": "doctor-message-card",
+      "number": 28,
+      "file": "crops/28-doctor-message-card.png",
+      "section": "Right column",
+      "role": "card",
+      "source_bbox_px": {
+        "x": 1000,
+        "y": 412,
+        "width": 619,
+        "height": 140
+      },
+      "stage_bbox_px_approx": {
+        "x": 765.6,
+        "y": 315.2,
+        "width": 473.9,
+        "height": 107.1
+      },
+      "baked_background": true
+    },
+    {
+      "id": "doctor-avatar-reference",
+      "number": 29,
+      "file": "crops/29-doctor-avatar-reference.png",
+      "section": "Right column",
+      "role": "portrait reference; background baked in",
+      "source_bbox_px": {
+        "x": 1029,
+        "y": 466,
+        "width": 74,
+        "height": 75
+      },
+      "stage_bbox_px_approx": {
+        "x": 787.8,
+        "y": 356.6,
+        "width": 56.7,
+        "height": 57.4
+      },
+      "baked_background": true
+    },
+    {
+      "id": "doctor-message-body",
+      "number": 30,
+      "file": "crops/30-doctor-message-body.png",
+      "section": "Right column",
+      "role": "text + chevron",
+      "source_bbox_px": {
+        "x": 1106,
+        "y": 464,
+        "width": 474,
+        "height": 79
+      },
+      "stage_bbox_px_approx": {
+        "x": 846.7,
+        "y": 355.0,
+        "width": 362.9,
+        "height": 60.4
+      },
+      "baked_background": true
+    },
+    {
+      "id": "today-schedule-card",
+      "number": 31,
+      "file": "crops/31-today-schedule-card.png",
+      "section": "Right column",
+      "role": "card",
+      "source_bbox_px": {
+        "x": 1000,
+        "y": 562,
+        "width": 618,
+        "height": 169
+      },
+      "stage_bbox_px_approx": {
+        "x": 765.6,
+        "y": 430.0,
+        "width": 473.1,
+        "height": 129.3
+      },
+      "baked_background": true
+    },
+    {
+      "id": "morning-schedule-row",
+      "number": 32,
+      "file": "crops/32-morning-schedule-row.png",
+      "section": "Right column",
+      "role": "selected schedule row",
+      "source_bbox_px": {
+        "x": 1024,
+        "y": 616,
+        "width": 576,
+        "height": 45
+      },
+      "stage_bbox_px_approx": {
+        "x": 783.9,
+        "y": 471.3,
+        "width": 441.0,
+        "height": 34.4
+      },
+      "baked_background": true
+    },
+    {
+      "id": "ultrasound-schedule-row",
+      "number": 33,
+      "file": "crops/33-ultrasound-schedule-row.png",
+      "section": "Right column",
+      "role": "schedule row",
+      "source_bbox_px": {
+        "x": 1025,
+        "y": 661,
+        "width": 574,
+        "height": 47
+      },
+      "stage_bbox_px_approx": {
+        "x": 784.7,
+        "y": 505.8,
+        "width": 439.4,
+        "height": 36.0
+      },
+      "baked_background": true
+    },
+    {
+      "id": "sputnik-assistant-footer",
+      "number": 34,
+      "file": "crops/34-sputnik-assistant-footer.png",
+      "section": "Footer",
+      "role": "full width persistent assistant",
+      "source_bbox_px": {
+        "x": 44,
+        "y": 772,
+        "width": 1574,
+        "height": 114
+      },
+      "stage_bbox_px_approx": {
+        "x": 33.7,
+        "y": 590.7,
+        "width": 1205.0,
+        "height": 87.2
+      },
+      "baked_background": true
+    },
+    {
+      "id": "sputnik-voice-orb-reference",
+      "number": 35,
+      "file": "crops/35-sputnik-voice-orb-reference.png",
+      "section": "Footer",
+      "role": "reference crop",
+      "source_bbox_px": {
+        "x": 79,
+        "y": 786,
+        "width": 101,
+        "height": 94
+      },
+      "stage_bbox_px_approx": {
+        "x": 60.5,
+        "y": 601.4,
+        "width": 77.3,
+        "height": 71.9
+      },
+      "baked_background": true
+    },
+    {
+      "id": "assistant-message",
+      "number": 36,
+      "file": "crops/36-assistant-message.png",
+      "section": "Footer",
+      "role": "text",
+      "source_bbox_px": {
+        "x": 228,
+        "y": 777,
+        "width": 860,
+        "height": 94
+      },
+      "stage_bbox_px_approx": {
+        "x": 174.5,
+        "y": 594.5,
+        "width": 658.4,
+        "height": 71.9
+      },
+      "baked_background": true
+    },
+    {
+      "id": "talk-to-sputnik-button",
+      "number": 37,
+      "file": "crops/37-talk-to-sputnik-button.png",
+      "section": "Footer",
+      "role": "action",
+      "source_bbox_px": {
+        "x": 1342,
+        "y": 801,
+        "width": 254,
+        "height": 60
+      },
+      "stage_bbox_px_approx": {
+        "x": 1027.4,
+        "y": 612.9,
+        "width": 194.4,
+        "height": 45.9
+      },
+      "baked_background": true
+    }
+  ]
+}
