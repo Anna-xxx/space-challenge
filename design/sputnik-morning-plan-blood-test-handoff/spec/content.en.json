@@ -1,0 +1,104 @@
+{
+  "screen": "morning_plan.blood_test.prepare",
+  "title": "Morning Plan",
+  "description": "Complete your morning checks and today’s medical tasks in one session.",
+  "nav": {
+    "tabs": [
+      "Morning",
+      "Trends",
+      "Doctor",
+      "Profile"
+    ],
+    "network": "Onboard network",
+    "mission": "MARS MISSION · DAY 186",
+    "battery_demo": "92%",
+    "rightmost_action": "Emergency"
+  },
+  "steps": [
+    {
+      "id": "blood_test",
+      "title": "Blood test",
+      "detail": "Doctor’s order · ≈ 5 min"
+    },
+    {
+      "id": "blood_pressure",
+      "title": "Blood pressure",
+      "detail": "≈ 1 min"
+    },
+    {
+      "id": "temperature",
+      "title": "Temperature",
+      "detail": "≈ 15 sec"
+    },
+    {
+      "id": "mood_symptoms",
+      "title": "Mood & symptoms",
+      "detail": "≈ 30 sec"
+    },
+    {
+      "id": "oxygen",
+      "title": "Blood oxygen (SpO₂)",
+      "detail": "≈ 30 sec"
+    },
+    {
+      "id": "urine_test",
+      "title": "Urine test",
+      "detail": "Doctor’s order · ≈ 2 min"
+    }
+  ],
+  "session": {
+    "step": "Step 1 of 6",
+    "completed": "0 of 6 completed"
+  },
+  "active": {
+    "category": "Doctor’s order",
+    "badge": "Before breakfast",
+    "heading": "Blood test",
+    "detail": "≈ 5 minutes · Scheduled by your doctor",
+    "substeps": [
+      "Prepare",
+      "Collect",
+      "Analyze",
+      "Result"
+    ],
+    "current_substep": "Prepare",
+    "preparation": [
+      "Set up the blood analyzer on a stable surface.",
+      "Get a lancet, test strip and gauze ready.",
+      "Wash and dry your hands."
+    ],
+    "primary": "Continue to collect sample",
+    "secondary": "Skip for now"
+  },
+  "sputnik": {
+    "title": "Sputnik",
+    "message": "Let’s start with the blood test. It’s scheduled before breakfast and will take about 5 minutes. I’ll guide you through the process.",
+    "action": "Talk to Sputnik"
+  },
+  "skip": {
+    "status": "Not measured",
+    "reason_question": "Why skip this test?",
+    "reasons": [
+      {
+        "value": "device_unavailable",
+        "label": "Device not working"
+      },
+      {
+        "value": "no_time",
+        "label": "No time"
+      },
+      {
+        "value": "declined",
+        "label": "Prefer not to say"
+      }
+    ],
+    "warning": "This doctor-ordered test will remain incomplete.",
+    "next": "Blood pressure",
+    "optional_reason": true
+  },
+  "corrections": [
+    "Top right is incorrectly labeled Пропустить in generated screenshot; must be Emergency.",
+    "Use correct SpO₂ formatting.",
+    "Subtitle has possible generated spelling artifact; use the approved wording above."
+  ]
+}

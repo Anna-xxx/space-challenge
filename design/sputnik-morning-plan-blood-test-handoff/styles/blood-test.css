@@ -1,0 +1,14 @@
+/* Additive styles only; reuse the existing Morning Dashboard tokens. */
+@import url('../../sputnik-morning-dashboard-dev-handoff/styles/tokens.css');
+.blood-task-actions{display:grid;grid-template-columns:minmax(0,1fr) minmax(160px,26%);gap:16px;width:100%}
+.blood-task-actions button{min-height:52px;border-radius:var(--radius-pill);font-family:var(--font-ui);font-weight:700;cursor:pointer}
+.blood-task-actions .primary{border:1px solid var(--accent-cyan);color:var(--space-950);background:linear-gradient(180deg,#17ffff,#00dfe5);box-shadow:var(--accent-glow)}
+.blood-task-actions .secondary{border:1px solid var(--border-soft);color:var(--text-main);background:linear-gradient(180deg,rgba(22,48,61,.82),rgba(6,29,42,.96))}
+.blood-task-actions .secondary:hover,.blood-task-actions .secondary:focus-visible{border-color:var(--accent-cyan-dim)}
+.blood-task-actions button:focus-visible{outline:3px solid var(--accent-amber);outline-offset:3px}
+.skip-reason{padding:14px 18px;border-radius:var(--radius-inner);border:1px solid var(--border-soft);background:var(--glass-panel);box-shadow:var(--border-glow)}
+.skip-reason__choices{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.skip-reason__choices button{min-height:44px;padding:8px 16px;border:1px solid var(--border-inner);border-radius:var(--radius-pill);background:var(--glass-inner);color:var(--text-main)}
+.status--skipped{color:var(--text-muted);border-color:var(--border-inner)}
+@media(max-width:720px){.blood-task-actions{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.blood-task-actions button,.skip-reason{animation:none!important;transition:none!important}}

@@ -1,0 +1,283 @@
+{
+  "source_image": "reference/full-reference.png",
+  "canvas_px": [
+    1668,
+    943
+  ],
+  "stage_target_px": [
+    1280,
+    720
+  ],
+  "regions": [
+    {
+      "id": "01-brand-logo",
+      "file": "assets/01-brand-logo.png",
+      "bbox_px": [
+        81,
+        24,
+        310,
+        120
+      ],
+      "x_pct": 4.86,
+      "y_pct": 2.55,
+      "width_pct": 13.73,
+      "height_pct": 10.18,
+      "has_baked_in_background": true
+    },
+    {
+      "id": "02-header-brand-lockup",
+      "file": "assets/02-header-brand-lockup.png",
+      "bbox_px": [
+        83,
+        26,
+        601,
+        120
+      ],
+      "x_pct": 4.98,
+      "y_pct": 2.76,
+      "width_pct": 31.06,
+      "height_pct": 9.97,
+      "has_baked_in_background": true
+    },
+    {
+      "id": "03-top-network",
+      "file": "assets/03-top-network.png",
+      "bbox_px": [
+        1100,
+        47,
+        1324,
+        105
+      ],
+      "x_pct": 65.95,
+      "y_pct": 4.98,
+      "width_pct": 13.43,
+      "height_pct": 6.15,
+      "has_baked_in_background": true
+    },
+    {
+      "id": "04-top-mission",
+      "file": "assets/04-top-mission.png",
+      "bbox_px": [
+        1325,
+        47,
+        1610,
+        108
+      ],
+      "x_pct": 79.44,
+      "y_pct": 4.98,
+      "width_pct": 17.09,
+      "height_pct": 6.47,
+      "has_baked_in_background": true
+    },
+    {
+      "id": "05-hero-heading",
+      "file": "assets/05-hero-heading.png",
+      "bbox_px": [
+        93,
+        192,
+        746,
+        490
+      ],
+      "x_pct": 5.58,
+      "y_pct": 20.36,
+      "width_pct": 39.15,
+      "height_pct": 31.6,
+      "has_baked_in_background": true
+    },
+    {
+      "id": "06-time-and-contact",
+      "file": "assets/06-time-and-contact.png",
+      "bbox_px": [
+        210,
+        514,
+        722,
+        576
+      ],
+      "x_pct": 12.59,
+      "y_pct": 54.51,
+      "width_pct": 30.7,
+      "height_pct": 6.57,
+      "has_baked_in_background": true
+    },
+    {
+      "id": "07-signin-panel",
+      "file": "assets/07-signin-panel.png",
+      "bbox_px": [
+        1016,
+        213,
+        1566,
+        618
+      ],
+      "x_pct": 60.91,
+      "y_pct": 22.59,
+      "width_pct": 32.97,
+      "height_pct": 42.95,
+      "has_baked_in_background": true
+    },
+    {
+      "id": "08-primary-nfc-button",
+      "file": "assets/08-primary-nfc-button.png",
+      "bbox_px": [
+        1054,
+        382,
+        1522,
+        455
+      ],
+      "x_pct": 63.19,
+      "y_pct": 40.51,
+      "width_pct": 28.06,
+      "height_pct": 7.74,
+      "has_baked_in_background": true
+    },
+    {
+      "id": "09-pin-button",
+      "file": "assets/09-pin-button.png",
+      "bbox_px": [
+        1054,
+        508,
+        1294,
+        577
+      ],
+      "x_pct": 63.19,
+      "y_pct": 53.87,
+      "width_pct": 14.39,
+      "height_pct": 7.32,
+      "has_baked_in_background": true
+    },
+    {
+      "id": "10-voice-button",
+      "file": "assets/10-voice-button.png",
+      "bbox_px": [
+        1284,
+        508,
+        1525,
+        577
+      ],
+      "x_pct": 76.98,
+      "y_pct": 53.87,
+      "width_pct": 14.45,
+      "height_pct": 7.32,
+      "has_baked_in_background": true
+    },
+    {
+      "id": "11-emergency-button",
+      "file": "assets/11-emergency-button.png",
+      "bbox_px": [
+        86,
+        798,
+        303,
+        882
+      ],
+      "x_pct": 5.16,
+      "y_pct": 84.62,
+      "width_pct": 13.01,
+      "height_pct": 8.91,
+      "has_baked_in_background": true
+    },
+    {
+      "id": "12-quick-check-button",
+      "file": "assets/12-quick-check-button.png",
+      "bbox_px": [
+        299,
+        798,
+        526,
+        881
+      ],
+      "x_pct": 17.93,
+      "y_pct": 84.62,
+      "width_pct": 13.61,
+      "height_pct": 8.8,
+      "has_baked_in_background": true
+    },
+    {
+      "id": "13-languages",
+      "file": "assets/13-languages.png",
+      "bbox_px": [
+        1403,
+        848,
+        1596,
+        902
+      ],
+      "x_pct": 84.11,
+      "y_pct": 89.93,
+      "width_pct": 11.57,
+      "height_pct": 5.73,
+      "has_baked_in_background": true
+    },
+    {
+      "id": "14-astronaut-reference",
+      "file": "assets/14-astronaut-reference.png",
+      "bbox_px": [
+        51,
+        483,
+        207,
+        803
+      ],
+      "x_pct": 3.06,
+      "y_pct": 51.22,
+      "width_pct": 9.35,
+      "height_pct": 33.93,
+      "has_baked_in_background": true
+    },
+    {
+      "id": "15-spacecraft-reference",
+      "file": "assets/15-spacecraft-reference.png",
+      "bbox_px": [
+        848,
+        570,
+        1668,
+        943
+      ],
+      "x_pct": 50.84,
+      "y_pct": 60.45,
+      "width_pct": 49.16,
+      "height_pct": 39.55,
+      "has_baked_in_background": true
+    },
+    {
+      "id": "16-mars-horizon-reference",
+      "file": "assets/16-mars-horizon-reference.png",
+      "bbox_px": [
+        0,
+        624,
+        1065,
+        943
+      ],
+      "x_pct": 0,
+      "y_pct": 66.17,
+      "width_pct": 63.85,
+      "height_pct": 33.83,
+      "has_baked_in_background": true
+    },
+    {
+      "id": "17-earth-reference",
+      "file": "assets/17-earth-reference.png",
+      "bbox_px": [
+        876,
+        265,
+        943,
+        327
+      ],
+      "x_pct": 52.52,
+      "y_pct": 28.1,
+      "width_pct": 4.02,
+      "height_pct": 6.57,
+      "has_baked_in_background": true
+    },
+    {
+      "id": "18-hero-background-detail",
+      "file": "assets/18-hero-background-detail.png",
+      "bbox_px": [
+        745,
+        65,
+        1024,
+        675
+      ],
+      "x_pct": 44.66,
+      "y_pct": 6.89,
+      "width_pct": 16.73,
+      "height_pct": 64.69,
+      "has_baked_in_background": true
+    }
+  ]
+}

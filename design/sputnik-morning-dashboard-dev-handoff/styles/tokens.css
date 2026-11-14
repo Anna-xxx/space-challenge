@@ -1,0 +1,52 @@
+/* Sputnik 2.0 / Morning Dashboard — ESTIMATES from a single 1672×941 screenshot.
+   Values are REFERENCE tokens, not extracted Figma styles. */
+:root {
+  --space-950: #010d17;
+  --space-900: #041521;
+  --glass-panel: rgba(7, 26, 39, .88);
+  --glass-inner: rgba(10, 37, 51, .82);
+  --glass-highlight: rgba(64, 183, 204, .12);
+  --border-soft: rgba(161, 217, 230, .58);
+  --border-inner: rgba(118, 174, 194, .35);
+  --accent-cyan: #05edf0;
+  --accent-cyan-dim: #18bbcd;
+  --accent-orange: #fa824d;
+  --accent-amber: #ffbd2b;
+  --text-main: #f4f7fa;
+  --text-muted: #bac8d2;
+  --text-info: #5ceaf0;
+  --border-glow: 0 0 12px rgba(13,228,234,.16);
+  --accent-glow: 0 0 20px rgba(0,239,244,.25);
+  --orange-edge-glow: 0 -2px 16px rgba(255,133,67,.45);
+  --glass-blur: 14px;
+  --radius-panel: 26px;
+  --radius-inner: 20px;
+  --radius-pill: 999px;
+  --font-ui: Inter, 'Segoe UI', Arial, sans-serif;
+}
+/* Target baseline: 1280×720 logical canvas, scalable as one 16:9 scene.
+   Screenshot sample at 1672×941 = 1.306× scale. */
+* { box-sizing:border-box; }
+.morning-stage { position:relative;width:1280px;height:720px;overflow:hidden;
+  font-family:var(--font-ui);color:var(--text-main);
+  background:var(--space-950); }
+.morning-panel { background:linear-gradient(150deg, rgba(6,39,49,.96), rgba(5,20,31,.91) 58%, rgba(7,29,41,.92));
+  border:1px solid var(--border-soft);border-radius:var(--radius-panel);
+  box-shadow:inset 0 0 22px rgba(0,201,210,.06),0 12px 26px rgba(0,0,0,.24); }
+.morning-subpanel { border:1px solid var(--border-inner);border-radius:var(--radius-inner);
+  background:linear-gradient(180deg,rgba(16,47,61,.91),rgba(6,27,38,.95)); }
+.morning-action--primary { background:linear-gradient(180deg,#03616c 0%,#00515d 58%,#003d4b 100%);
+  border:1px solid var(--accent-cyan);border-radius:var(--radius-pill);
+  box-shadow:inset 0 2px 6px rgba(103,253,248,.26),var(--accent-glow);color:var(--text-main);font-weight:700; }
+.morning-action--danger { border:1px solid var(--accent-orange);
+  border-radius:var(--radius-pill);background:linear-gradient(180deg,#e25e2d,#9e3223);color:#fff; }
+.morning-badge--priority { border-radius:var(--radius-pill);background:#ffbd2b;color:#151719;
+  font-weight:700;padding:3px 12px; }
+.morning-badge--added { border:1px solid var(--accent-cyan);color:var(--accent-cyan);
+  border-radius:var(--radius-pill);padding:3px 12px;background:rgba(0,141,160,.08); }
+.morning-status-pill { border:1px solid rgba(165,195,208,.42);background:rgba(8,22,32,.65);
+  border-radius:var(--radius-pill); }
+.morning-row {min-height:28px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(145,187,207,.22);}
+.morning-button-hit { min-width:44px;min-height:44px;cursor:pointer; }
+/* Color denotes state, not exclusively modality: orange = medical priority/attention;
+   cyan = current action/connected/selected. Do not use color alone to communicate meaning. */

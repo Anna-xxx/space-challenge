@@ -1,0 +1,25 @@
+/* Approximate visual tokens estimated from the PNG, NOT original design source. */
+:root {
+  --sputnik-space: #000b17;
+  --sputnik-night: #061826;
+  --sputnik-panel: rgba(7, 23, 35, 0.86);
+  --sputnik-panel-stroke: rgba(149, 210, 227, 0.58);
+  --sputnik-cyan: #0ee5e9;
+  --sputnik-cyan-bright: #24f3f3;
+  --sputnik-orange: #f57543;
+  --sputnik-danger: #ef552f;
+  --sputnik-text: #f2f5fa;
+  --sputnik-muted: #b6c2cf;
+  --sputnik-glass-shadow: 0 10px 38px rgba(0,0,0,.24), inset 0 0 24px rgba(11,84,109,.14);
+  --sputnik-radius-card: 38px;
+  --sputnik-radius-button: 999px;
+  --sputnik-hit-target-min: 48px;
+}
+/* Use in a fixed 1280×720 scene that scales uniformly to the tablet viewport.
+   The image is 1668×943, which is nearly 16:9, so values are estimates. */
+.sputnik-stage {width:1280px;height:720px;position:relative;background:var(--sputnik-space);color:var(--sputnik-text);font-family:Inter,Arial,sans-serif;overflow:hidden}
+.sputnik-card {background:var(--sputnik-panel);border:1px solid var(--sputnik-panel-stroke);border-radius:var(--sputnik-radius-card);box-shadow:var(--sputnik-glass-shadow)}
+.sputnik-action {min-height:48px;border-radius:var(--sputnik-radius-button);font-weight:600}
+.sputnik-action--nfc {border:1px solid var(--sputnik-cyan);color:var(--sputnik-text);background:linear-gradient(180deg,rgba(2,43,59,.77),rgba(2,21,31,.78));box-shadow:0 0 13px rgba(0,224,230,.18)}
+.sputnik-action--secondary {border:1px solid #39576b;background:rgba(15,34,49,.82);color:var(--sputnik-text)}
+.sputnik-action--emergency {border:1px solid var(--sputnik-orange);background:linear-gradient(135deg,#ff663e,#b83125);color:white}
