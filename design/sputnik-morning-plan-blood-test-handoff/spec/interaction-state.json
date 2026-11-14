@@ -1,0 +1,85 @@
+{
+  "scope": "Proposed non-blocking UI mapping of the approved skip rule from docs/04-interfeys-i-vzaimodeystvie.md",
+  "step_statuses": [
+    "pending",
+    "active",
+    "completed",
+    "skipped",
+    "needs_attention"
+  ],
+  "step_order": [
+    "blood_test",
+    "blood_pressure",
+    "temperature",
+    "mood_symptoms",
+    "oxygen",
+    "urine_test"
+  ],
+  "substeps_blood_test": [
+    "prepare",
+    "collect",
+    "analyze",
+    "result"
+  ],
+  "events": [
+    {
+      "event": "CONTINUE_PREPARE",
+      "from": "blood_test.prepare",
+      "to": "blood_test.collect",
+      "effect": "No completion count yet"
+    },
+    {
+      "event": "SKIP_STEP",
+      "from": "blood_test.*",
+      "to": "blood_pressure.prepare",
+      "effect": "Set blood_test.status=skipped, result=null, completed_count=0; keep doctor order outstanding and show optional reason prompt without a blocking modal"
+    },
+    {
+      "event": "SET_SKIP_REASON",
+      "from": "current_session",
+      "to": "current_session",
+      "effect": "One-tap optional reason; device unavailable sends technical fault note to onboard medic and engineer; other reasons not shared"
+    },
+    {
+      "event": "VERIFIED_RESULT",
+      "from": "blood_test.result",
+      "to": "blood_pressure.prepare",
+      "effect": "Only a real verified result can set blood_test.status=completed"
+    },
+    {
+      "event": "RETRY_SKIPPED",
+      "from": "later_session",
+      "to": "blood_test.prepare",
+      "effect": "Allow later retry with audit trail"
+    }
+  ],
+  "progress": {
+    "completed_count": "count(status===completed)",
+    "skipped_count": "count(status===skipped)",
+    "skip_does_not_increment_completed": true
+  },
+  "skip_record_example": {
+    "step_id": "blood_test",
+    "status": "skipped",
+    "result": null,
+    "skip_reason": null,
+    "is_doctor_order": true,
+    "doctor_order_status": "outstanding",
+    "recorded_at": "ISO-8601 timestamp from app clock"
+  },
+  "privacy": {
+    "device_unavailable": "onboard medic and engineer receive a device problem note",
+    "no_time": "reason not transmitted",
+    "declined": "reason not transmitted",
+    "doctor_report": "blood test not performed; skip reason not automatically shared"
+  },
+  "rules": [
+    "Skip allowed at any step; no blocking confirmation",
+    "Skipped is grey Not measured, never a green check",
+    "No automatic diagnosis/zone from missing measurement",
+    "Doctor order remains outstanding",
+    "No invented lab result; lab turnaround may be longer than active task duration",
+    "Emergency remains available in app header",
+    "Voice command skip maps to same transition"
+  ]
+}

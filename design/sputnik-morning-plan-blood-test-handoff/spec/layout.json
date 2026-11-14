@@ -1,0 +1,271 @@
+{
+  "source_name": "План утра_ анализ крови и пропуск шага.png",
+  "source_sha256": "1625b3c72d3fc2f89ddbad0655c018324f450174d484cd30362d204f77fa8dea",
+  "source_dimensions_px": [
+    1671,
+    941
+  ],
+  "logical_stage_px": [
+    1280,
+    720
+  ],
+  "measurement": "Approximate screenshot rectangles; verify manually. Reference crops include baked background and text, not editable source assets.",
+  "regions": [
+    {
+      "id": "01-header-navigation",
+      "source_xyxy_px": [
+        43,
+        0,
+        1629,
+        73
+      ],
+      "stage_xywh_px_approx": [
+        32.9,
+        0,
+        1214.9,
+        55.9
+      ],
+      "reference_crop": "crops/01-header-navigation.png"
+    },
+    {
+      "id": "02-page-title",
+      "source_xyxy_px": [
+        53,
+        76,
+        795,
+        144
+      ],
+      "stage_xywh_px_approx": [
+        40.6,
+        58.2,
+        568.4,
+        52
+      ],
+      "reference_crop": "crops/02-page-title.png"
+    },
+    {
+      "id": "03-session-stepper",
+      "source_xyxy_px": [
+        52,
+        154,
+        1619,
+        214
+      ],
+      "stage_xywh_px_approx": [
+        39.8,
+        117.8,
+        1200.3,
+        45.9
+      ],
+      "reference_crop": "crops/03-session-stepper.png"
+    },
+    {
+      "id": "04-session-list",
+      "source_xyxy_px": [
+        50,
+        233,
+        634,
+        744
+      ],
+      "stage_xywh_px_approx": [
+        38.3,
+        178.3,
+        447.3,
+        391
+      ],
+      "reference_crop": "crops/04-session-list.png"
+    },
+    {
+      "id": "05-doctor-order-active",
+      "source_xyxy_px": [
+        75,
+        316,
+        616,
+        376
+      ],
+      "stage_xywh_px_approx": [
+        57.5,
+        241.8,
+        414.4,
+        45.9
+      ],
+      "reference_crop": "crops/05-doctor-order-active.png"
+    },
+    {
+      "id": "06-main-workspace",
+      "source_xyxy_px": [
+        653,
+        233,
+        1619,
+        744
+      ],
+      "stage_xywh_px_approx": [
+        500.2,
+        178.3,
+        740,
+        391
+      ],
+      "reference_crop": "crops/06-main-workspace.png"
+    },
+    {
+      "id": "07-blood-test-heading",
+      "source_xyxy_px": [
+        685,
+        240,
+        1355,
+        342
+      ],
+      "stage_xywh_px_approx": [
+        524.7,
+        183.6,
+        513.2,
+        78
+      ],
+      "reference_crop": "crops/07-blood-test-heading.png"
+    },
+    {
+      "id": "08-blood-substeps",
+      "source_xyxy_px": [
+        686,
+        348,
+        1595,
+        400
+      ],
+      "stage_xywh_px_approx": [
+        525.5,
+        266.3,
+        696.3,
+        39.8
+      ],
+      "reference_crop": "crops/08-blood-substeps.png"
+    },
+    {
+      "id": "09-analyzer-reference",
+      "source_xyxy_px": [
+        699,
+        423,
+        1111,
+        641
+      ],
+      "stage_xywh_px_approx": [
+        535.4,
+        323.7,
+        315.6,
+        166.8
+      ],
+      "reference_crop": "crops/09-analyzer-reference.png"
+    },
+    {
+      "id": "10-preparation-instructions",
+      "source_xyxy_px": [
+        1118,
+        417,
+        1590,
+        644
+      ],
+      "stage_xywh_px_approx": [
+        856.4,
+        319.1,
+        361.6,
+        173.7
+      ],
+      "reference_crop": "crops/10-preparation-instructions.png"
+    },
+    {
+      "id": "11-continue-primary",
+      "source_xyxy_px": [
+        680,
+        650,
+        1324,
+        726
+      ],
+      "stage_xywh_px_approx": [
+        520.9,
+        497.3,
+        493.3,
+        58.2
+      ],
+      "reference_crop": "crops/11-continue-primary.png"
+    },
+    {
+      "id": "12-skip-secondary",
+      "source_xyxy_px": [
+        1337,
+        652,
+        1599,
+        726
+      ],
+      "stage_xywh_px_approx": [
+        1024.2,
+        498.9,
+        200.7,
+        56.6
+      ],
+      "reference_crop": "crops/12-skip-secondary.png"
+    },
+    {
+      "id": "13-sputnik-bar",
+      "source_xyxy_px": [
+        48,
+        772,
+        1617,
+        890
+      ],
+      "stage_xywh_px_approx": [
+        36.8,
+        590.7,
+        1201.9,
+        90.3
+      ],
+      "reference_crop": "crops/13-sputnik-bar.png"
+    },
+    {
+      "id": "14-assistant-orb",
+      "source_xyxy_px": [
+        78,
+        781,
+        184,
+        883
+      ],
+      "stage_xywh_px_approx": [
+        59.7,
+        597.6,
+        81.2,
+        78
+      ],
+      "reference_crop": "crops/14-assistant-orb.png"
+    },
+    {
+      "id": "15-talk-button",
+      "source_xyxy_px": [
+        1318,
+        800,
+        1590,
+        863
+      ],
+      "stage_xywh_px_approx": [
+        1009.6,
+        612.1,
+        208.4,
+        48.2
+      ],
+      "reference_crop": "crops/15-talk-button.png"
+    },
+    {
+      "id": "16-incorrect-top-right-label",
+      "source_xyxy_px": [
+        1477,
+        13,
+        1630,
+        66
+      ],
+      "stage_xywh_px_approx": [
+        1131.4,
+        9.9,
+        117.2,
+        40.6
+      ],
+      "reference_crop": "crops/16-incorrect-top-right-label.png"
+    }
+  ]
+}
